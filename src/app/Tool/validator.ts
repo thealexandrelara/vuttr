@@ -16,7 +16,6 @@ const update = {
     description: Joi.string(),
     tags: Joi.array().items(Joi.string())
   }
-
 }
 
 export default {
