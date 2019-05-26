@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: yarn dev
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+    depends_on:
+      - database
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
