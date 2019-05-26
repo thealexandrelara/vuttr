@@ -10,8 +10,10 @@
     "build": "sucrase ./src -d ./dist --transforms typescript,imports"
   },
   "devDependencies": {
+    "@types/boom": "^7.2.1",
     "@types/cors": "^2.8.5",
     "@types/express": "^4.16.1",
+    "@types/hapi__boom": "^7.4.0",
     "@types/mongoose": "^5.5.3",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
@@ -29,8 +31,11 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
+    "@hapi/boom": "^7.4.2",
+    "celebrate": "^10.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.0",
-    "mongoose": "^5.5.11"
+    "mongoose": "^5.5.11",
+    "youch": "^2.0.10"
   }
 }
