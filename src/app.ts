@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import Boom from '@hapi/boom'
 import Youch from 'youch'
+import celebrate from 'celebrate'
 
 import AppRoutes from './routes'
 
@@ -35,6 +36,9 @@ class App {
 
   private setupExceptionHandler () : void {
     this.express.use(async (err, req, res, next) : Promise<express.Response> => {
+      if (celebrate.isCelebrate(err)) {
+        return res.status(400).json(err)
+      }
       if (err instanceof Boom) {
         return res.status(err.output.statusCode).json(err.output.payload)
       }
