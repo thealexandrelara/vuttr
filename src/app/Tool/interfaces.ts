@@ -1,4 +1,4 @@
-import { Document } from 'mongoose'
+export { ToolDocument } from './model'
 
 export interface Tool {
   title?: string,
@@ -6,5 +6,3 @@ export interface Tool {
   description?: string,
   tags?: [string]
 }
-
-export interface ToolDocument extends Document, Tool {}

@@ -1,12 +1,14 @@
-import { model, Schema } from 'mongoose'
-import { ToolDocument } from './interfaces'
+import { model, Schema, Document } from 'mongoose'
+import { Tool } from './interfaces'
+
+export interface ToolDocument extends Document, Tool {}
 
 const ToolSchema = new Schema({
   title: String,
   link: String,
   description: String,
   tags: [String]
-})
+}, { timestamps: true })
 
 const ToolModel = model<ToolDocument>('Tool', ToolSchema)
 

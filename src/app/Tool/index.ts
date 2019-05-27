@@ -1,7 +1,3 @@
-import Routes from './routes'
-import Controller from './controller'
-import Model from './model'
-
-export const ToolController = Controller
-export const ToolModel = Model
-export const ToolRoutes = Routes
+export { default as ToolController } from './controller'
+export { default as ToolModel } from './model'
+export { default as ToolRoutes } from './routes'

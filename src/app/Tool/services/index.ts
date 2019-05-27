@@ -1,7 +1,3 @@
-import _CreateTool from './CreateTool'
-import _GetAllTools from './GetAllTools'
-import _GetToolById from './GetToolById'
-
-export const CreateTool = _CreateTool
-export const GetAllTools = _GetAllTools
-export const GetToolById = _GetToolById
+export { default as CreateTool } from './CreateTool'
+export { default as GetAllTools } from './GetAllTools'
+export { default as GetToolById } from './GetToolById'
