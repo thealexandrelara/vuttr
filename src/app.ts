@@ -42,7 +42,7 @@ class App {
       if (err instanceof Boom) {
         return res.status(err.output.statusCode).json(err.output.payload)
       }
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV !== 'production') {
         const youch = new Youch(err, req)
 
         return res.status(400).json(await youch.toJSON())

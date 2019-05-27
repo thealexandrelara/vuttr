@@ -1,5 +1,11 @@
 import { Joi } from 'celebrate'
 
+const index = {
+  query: {
+    tag: Joi.string()
+  }
+}
+
 const store = {
   body: {
     title: Joi.string().required(),
@@ -18,7 +24,15 @@ const update = {
   }
 }
 
+const show = {
+  params: {
+    id: Joi.string().required()
+  }
+}
+
 export default {
+  index,
   store,
-  update
+  update,
+  show
 }
