@@ -1,3 +1,8 @@
-export { default as UserModel } from './model'
+import * as Services from './services'
+
+export { default as UserModel, UserDocument } from './model'
 export { default as UserRoutes } from './routes'
 export { default as UserController } from './controller'
+export { default as UserRepository } from './repository'
+
+export const UserServices = Services

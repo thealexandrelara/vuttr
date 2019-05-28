@@ -1,3 +1,4 @@
+import { Account } from './components/Account'
 export { UserDocument } from './model'
 
 export interface User {
@@ -5,4 +6,5 @@ export interface User {
   lastName: string,
   email: string,
   password: string,
+  accounts: Account[]
 }

@@ -16,6 +16,8 @@
     "@types/hapi__boom": "^7.4.0",
     "@types/joi": "^14.3.3",
     "@types/mongoose": "^5.5.3",
+    "@types/passport": "^1.0.0",
+    "@types/passport-local": "^1.0.33",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "eslint": "^5.16.0",
@@ -33,11 +35,17 @@
   },
   "dependencies": {
     "@hapi/boom": "^7.4.2",
+    "bcrypt": "^3.0.6",
     "celebrate": "^10.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "express-async-handler": "^1.1.4",
     "mongoose": "^5.5.11",
+    "passport": "^0.4.0",
+    "passport-facebook-token": "^3.3.0",
+    "passport-google-plus-token": "^2.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "youch": "^2.0.10"
   }
 }
