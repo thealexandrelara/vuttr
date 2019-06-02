@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import { AccountKind } from '../../app/User/components/Account'
 import { UserServices, UserRepository, UserModel, UserDocument } from '../../app/User'
 
-passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) : void => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) : Promise<void> => {
   try {
     const repository = new UserRepository({ model: UserModel })
     const getUserByAccountKindAndUIDService = new UserServices.GetUserByAccountKindAndUID({ repository })

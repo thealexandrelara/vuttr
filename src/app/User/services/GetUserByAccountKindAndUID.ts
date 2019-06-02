@@ -1,4 +1,4 @@
-import UserRepository from '../repository'
+import { UserRepository } from '../repository'
 import { UserDocument } from '../model'
 import { AccountKind } from '../components/Account'
 

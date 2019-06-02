@@ -5,7 +5,13 @@ import Boom from '@hapi/boom'
 import Youch from 'youch'
 import celebrate from 'celebrate'
 
+import databaseConfig from './config/database'
 import AppRoutes from './routes'
+import RepositoryError from './utils/RepositoryError'
+import './middlewares/auth/jwt'
+import './middlewares/auth/google'
+import './middlewares/auth/facebook'
+import './middlewares/auth/local'
 
 class App {
   public express: express.Application
@@ -25,7 +31,7 @@ class App {
   }
 
   private setupDatabase () : void {
-    mongoose.connect('mongodb://database/tsnode', {
+    mongoose.connect(`${databaseConfig.host}/${databaseConfig.database}`, {
       useNewUrlParser: true
     })
   }
@@ -36,6 +42,9 @@ class App {
 
   private setupExceptionHandler () : void {
     this.express.use(async (err, req, res, next) : Promise<express.Response> => {
+      if (err instanceof RepositoryError) {
+        return res.status(err.httpError.output.statusCode).json(err.httpError.output.payload)
+      }
       if (celebrate.isCelebrate(err)) {
         return res.status(400).json(err)
       }

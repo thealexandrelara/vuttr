@@ -1,10 +1,10 @@
 import { Document, Schema, model } from 'mongoose'
 import { User } from './interfaces'
-import { AccountSchema, AccountKind, AccountDocument } from './components/Account'
+import { AccountSchema, AccountKind, Account } from './components/Account'
 import RepositoryError, { RepositoryErrorKind } from '../../utils/RepositoryError'
 
 export interface UserDocument extends Document, User {
-  accounts: AccountDocument[],
+  accounts: Account[],
   comparePassword(candidatePassword: string) : Promise<boolean>
 }
 

@@ -16,65 +16,21 @@ passport.use(
     async (req, accessToken, refreshToken, profile, done) : Promise<void> => {
       try {
         const repository = new UserRepository({ model: UserModel })
-        const getUserByAccountKindAndUIDService = new UserServices.GetUserByAccountKindAndUID({ repository })
-        const user = await getUserByAccountKindAndUIDService.execute({ kind: AccountKind.Google, uid: profile.id })
-        const existingUser = await User.findOne({
-          'accounts.kind': AccountKind.Google,
-          'accounts.uid': profile.id
-        }).select('+accounts.password')
+        const createUserAccountService = new UserServices.CreateUserAccount({ repository })
+        const name = extractUserName(profile)
+        const user = await createUserAccountService.execute({ kind: AccountKind.Google, email: profile.emails[0].value, uid: profile.id, ...name })
 
-        if (existingUser) {
-          return done(null, existingUser)
-        }
-
-        const userWithAddedAccount = await addNewAccountToUserIfEmailIsAlreadyRegistered(
-          profile
-        )
-        if (userWithAddedAccount) return done(null, userWithAddedAccount)
-
-        console.log('proceding to create new user')
-
-        const newUser = await createNewUser(profile)
-
-        done(null, newUser)
+        done(null, user)
       } catch (error) {
         done(error, false, error.message)
       }
 
-      async function createNewUser (profile) {
-        const email = profile.emails[0].value
-        const account = {
-          kind: AccountKind.GOOGLE,
-          uid: profile.id,
-          email
-        }
+      function extractUserName (profile) : { firstName: string, lastName: string} {
+        const userName = profile.name.split(' ')
+        const { given_name: givenName, family_name: familyName } = profile.name || { given_name: undefined, family_name: undefined }
+        const name = { firstName: givenName || userName[0], lastName: familyName || userName[userName.length - 1] }
 
-        return User.create({
-          name: profile.displayName,
-          email,
-          accounts: [account]
-        })
-      }
-
-      async function addNewAccountToUserIfEmailIsAlreadyRegistered (profile) {
-        const email = profile.emails[0].value
-        const existingUser = await User.findOne({
-          'accounts.kind': AccountKind.LOCAL,
-          'accounts.email': email
-        })
-
-        if (existingUser) {
-          console.log('adding account to existing user')
-          existingUser.accounts.push({
-            kind: AccountKind.GOOGLE,
-            uid: profile.id,
-            email
-          })
-
-          await existingUser.save()
-
-          return existingUser
-        }
+        return name
       }
     }
   )

@@ -13,8 +13,8 @@ passport.use(new JwtStrategy(
   async (req, payload, done) : Promise<void> => {
     try {
       const repository = new UserRepository({ model: UserModel })
-      const getUserByIdService = new UserServices.GetUserById({ repository, options: { select: '-_id -createdAt -updatedAt -__v' } })
-      const user = await getUserByIdAndOmitUnnecessaryFields(payload.sub)
+      const getUserByIdService = new UserServices.GetUserById({ repository })
+      const user = await getUserByIdService.execute(payload.sub)
 
       if (!user) {
         return done(null, false)
@@ -25,10 +25,6 @@ passport.use(new JwtStrategy(
       done(null, user)
     } catch (error) {
       done(error, false)
-    }
-
-    async function getUserByIdAndOmitUnnecessaryFields (userId) {
-      return User.findById(userId).select('-_id -createdAt -updatedAt -__v')
     }
   }
 ))

@@ -7,19 +7,12 @@ export interface AccountDocument extends Document, Account {
   compareHash(candidatePassword: string) : Promise<boolean>
 }
 
-console.log('ACCOUNTKIND', Object.values(AccountKind))
-
 export const AccountSchema = new Schema({
   kind: {
     type: String,
     enum: Object.values(AccountKind)
   },
   uid: String,
-  email: {
-    type: String,
-    lowercase: true,
-    trim: true
-  },
   password: {
     type: String,
     minlength: 6,

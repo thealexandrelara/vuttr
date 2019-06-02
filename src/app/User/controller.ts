@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
 import UserModel from './model'
-import UserRepository from './repository'
-import { CreateUser, GetAllUsers } from './services'
+import { UserRepository } from './repository'
+import { CreateUserAccount, GetAllUsers } from './services'
+import { AccountKind, Account } from './components/Account'
+import { AuthServices } from '../Auth'
 
 class UserController {
   public async index (req: Request, res: Response) : Promise<Response> {
@@ -15,10 +17,12 @@ class UserController {
   public async store (req: Request, res: Response) : Promise<Response> {
     const { body } = req
     const repository = new UserRepository({ model: UserModel })
-    const createUserService = new CreateUser({ repository })
-    const user = await createUserService.execute(body)
+    const createUserAccountService = new CreateUserAccount({ repository })
+    const user = await createUserAccountService.execute({ ...body, kind: AccountKind.Local, uid: body.email })
+    const generateTokenService = new AuthServices.GenerateJwtToken()
+    const token = await generateTokenService.execute(user)
 
-    return res.json(user)
+    return res.json({ token })
   }
 
   public async update () {}
