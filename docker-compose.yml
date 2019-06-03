@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  server:
+  backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     command: yarn dev
     restart: always
@@ -11,10 +11,29 @@ services:
       - "3000:3000"
     volumes:
       - /usr/app/node_modules
-      - .:/usr/app
+      - ./backend:/usr/app
     depends_on:
       - database
   database:
     image: mongo
     ports:
       - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   command: yarn start
+  #   ports:
+  #     - "3001:3000"
+  #   volumes:
+  #     - /usr/app/node_modules
+  #     - ./client:/usr/app
+  #   depends_on:
+  #     - backend
+volumes:
+  mongodb_data:
+  mongodb_config:
