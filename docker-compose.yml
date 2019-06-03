@@ -21,19 +21,19 @@ services:
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   command: yarn start
-  #   ports:
-  #     - "3001:3000"
-  #   volumes:
-  #     - /usr/app/node_modules
-  #     - ./client:/usr/app
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    command: yarn start
+    ports:
+      - "3001:3000"
+    volumes:
+      - /usr/app/node_modules
+      - ./frontend:/usr/app
+    depends_on:
+      - backend
 volumes:
   mongodb_data:
   mongodb_config:
