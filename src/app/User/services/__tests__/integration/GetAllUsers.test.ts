@@ -1,8 +1,8 @@
 
-import Database from '../../../../../__tests__/utils/database'
-import { UserRepository, UserModel } from '../../../User'
-import { GetAllUsers, CreateUserAccount } from '../../services'
-import { AccountKind } from '../../components/Account'
+import Database from '../integration/../../../../../../__tests__/utils/database'
+import { UserRepository, UserModel } from '../../..'
+import { GetAllUsers, CreateUserAccount } from '../..'
+import { AccountKind } from '../../../components/Account'
 
 describe('User', () : void => {
   describe('services', () : void => {
@@ -19,7 +19,7 @@ describe('User', () : void => {
         await Database.disconnect()
       })
 
-      it('should get all users from database', async () : Promise<void> => {
+      it('should get all created users from database', async () : Promise<void> => {
         const repository = new UserRepository({ model: UserModel })
         const createUserAccountService = new CreateUserAccount({ repository: repository })
         await createUserAccountService.execute({ kind: AccountKind.Local, uid: 'alexandre@reakt.dev', email: 'alexandre@reakt.dev', password: '123456' })

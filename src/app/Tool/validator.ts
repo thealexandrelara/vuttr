@@ -30,9 +30,16 @@ const show = {
   }
 }
 
+const destroy = {
+  params: {
+    id: Joi.string().required()
+  }
+}
+
 export default {
   index,
   store,
   update,
-  show
+  show,
+  destroy
 }

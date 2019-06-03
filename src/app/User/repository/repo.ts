@@ -1,6 +1,6 @@
 import { Model } from 'mongoose'
 import { CreateUserAccountParams } from './interfaces'
-import { User, UserDocument } from '../interfaces'
+import { UserDocument } from '../interfaces'
 import { AccountKind, Account } from '../components/Account'
 import RepositoryError, { RepositoryErrorKind } from '../../../utils/RepositoryError'
 
@@ -19,12 +19,6 @@ class UserRepository {
 
   public async getUserById (id : string) : Promise<UserDocument> {
     const user = await this.model.findById(id)
-
-    return user
-  }
-
-  public async createUser (userData : User) : Promise<UserDocument> {
-    const user = await this.model.create(userData)
 
     return user
   }

@@ -8,8 +8,8 @@ class CreateTool {
     this.repository = repository
   }
 
-  public async execute (userData: Tool) : Promise<ToolDocument> {
-    const tool = await this.repository.createTool(userData)
+  public async execute (toolData: Tool, userId: string) : Promise<ToolDocument> {
+    const tool = await this.repository.createTool(toolData, userId)
 
     return tool
   }

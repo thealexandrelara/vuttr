@@ -1,14 +1,18 @@
 
-import Database from '../../../../../__tests__/utils/database'
-import { UserRepository, UserModel } from '../../../User'
-import { GetUserByAccountKindAndUID, CreateUserAccount } from '../../services'
-import { AccountKind } from '../../components/Account'
+import Database from '../integration/../../../../../../__tests__/utils/database'
+import { UserRepository, UserModel } from '../../..'
+import { GetUserByAccountKindAndUID, CreateUserAccount } from '../..'
+import { AccountKind } from '../../../components/Account'
 
 describe('User', () : void => {
   describe('services', () : void => {
     describe('GetUserByAccountKindAndUID', () : void => {
       beforeAll(async () : Promise<void> => {
         await Database.connect()
+      })
+
+      afterEach(async () : Promise<void> => {
+        await Database.clearDB()
       })
 
       afterAll(async () : Promise<void> => {

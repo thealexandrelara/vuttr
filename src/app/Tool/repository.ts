@@ -38,14 +38,14 @@ class ToolRepository {
     return tool
   }
 
-  public async createTool (toolData: Tool) : Promise<ToolDocument> {
-    const tool = await this.model.create(toolData)
+  public async createTool (toolData: Tool, user: string) : Promise<ToolDocument> {
+    const tool = await this.model.create({ ...toolData, user })
 
     return tool
   }
 
-  public async removeToolById (id: string) : Promise<ToolDocument> {
-    const removedTool = await this.model.findByIdAndRemove(id)
+  public async removeToolByIdAndUser (id: string, user: string) : Promise<ToolDocument> {
+    const removedTool = await this.model.findOneAndRemove({ _id: id, user })
 
     return removedTool
   }
