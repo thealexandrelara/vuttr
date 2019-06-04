@@ -1,0 +1,5 @@
+export enum ToolsTypes {
+  GET_TOOLS_REQUEST = '@tools/GET_TOOLS_REQUEST',
+  GET_TOOLS_SUCCESS = '@tools/GET_TOOLS_SUCCESS',
+  GET_TOOLS_ERROR = '@tools/GET_TOOLS_ERROR'
+}
