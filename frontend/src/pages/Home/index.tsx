@@ -6,6 +6,7 @@ import {
 
 import Search from './components/Search'
 import ToolList from './components/ToolList'
+import Button from '../../components/Button'
 
 const Home = () => (
   <Container>
@@ -14,7 +15,7 @@ const Home = () => (
       <Subtitle>Very Useful Tools to Remember</Subtitle>
       <ToolbarContainer>
         <Search />
-        <button type="button">Add</button>
+        <Button>Add</Button>
       </ToolbarContainer>
       <ToolList />
     </Content>
