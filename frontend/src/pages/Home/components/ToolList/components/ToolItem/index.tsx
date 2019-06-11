@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Button from '../../../../../components/Button'
+import RemoveTool from './components/RemoveTool'
 
 import {
  Container, HeaderContainer, Title, Description, TagsContainer, Tag,
@@ -11,7 +11,7 @@ function ToolItem() {
     <Container>
       <HeaderContainer>
         <Title>Notion</Title>
-        <Button>remove</Button>
+        <RemoveTool>remove</RemoveTool>
       </HeaderContainer>
       <Description>All in one tool to organize teams and ideas. Write, plan, collaborate and get organized.</Description>
       <TagsContainer>

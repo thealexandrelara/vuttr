@@ -1,16 +1,18 @@
 import styled, { css } from 'styled-components'
 
 interface Props {
-  isOpen: boolean;
+  kind?: string;
+  type?: 'button' | 'reset' | 'submit' | undefined;
 }
 
-const ButtonQuartiaryDanger = css`
+const ButtonQuarternaryDanger = css`
+  color: ${props => props.theme.colors.danger};
   background-color: transparent;
   font-weight: 600;
 `
 
-export const Container = styled.button`
-  color: ${props => props.theme.colors.d};
+export const Container = styled.button<Props>`
+  color: ${props => props.theme.colors.white};
   padding: 8px 24px;
   background-color: #365DF0;
   color: #FFFFFF;
@@ -20,16 +22,21 @@ export const Container = styled.button`
   border: 0;
   max-height: 50px;
 
-  &:hover {
-    background-color: #2F55CC;
-  }
+  ${props => !props.kind && css`
+    &:hover {
+      background-color: #2F55CC;
+    }
 
-  &:active {
-    background-color: #244AA8;
-  }
+    &:active {
+      background-color: #244AA8;
+    }
 
-  &:disabled {
-    background-color: #B9C6FA;
-    color: #E1E7FD;
-  }
+    &:disabled {
+      background-color: #B9C6FA;
+      color: #E1E7FD;
+    }
+  `}
+  
+
+  ${props => props.kind === 'quaternary-danger' && ButtonQuarternaryDanger}
 `

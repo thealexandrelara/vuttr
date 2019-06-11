@@ -6,7 +6,7 @@ import { Props } from './interfaces'
 
 import * as ToolsActions from '../../../../store/ducks/tools/actions'
 
-import ToolItem from './ToolItem'
+import ToolItem from './components/ToolItem'
 import { Container } from './styles'
 
 
