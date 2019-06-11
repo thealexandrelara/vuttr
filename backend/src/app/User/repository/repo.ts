@@ -26,7 +26,7 @@ class UserRepository {
   public async createUserAccount (userParams : CreateUserAccountParams) : Promise<UserDocument> {
     const _this = this
     checkIfEmailWasInformed(userParams)
-    checkIfIsLocalAccountCreationAndPasswordWasProvided(userParams)
+    checkIfPasswordWasProvidedWhenCreatingLocalAccount(userParams)
     const existingUser = await getUserWithUIDIfExists(userParams.email)
     await addUserAccountToExistingUser(existingUser, userParams)
     const user = await createUserIfNotCreated(existingUser, userParams)
@@ -39,10 +39,18 @@ class UserRepository {
       throw new RepositoryError('É necessário fornecer um e-mail para criar a conta do usuário', RepositoryErrorKind.MissingInfo)
     }
 
-    function checkIfIsLocalAccountCreationAndPasswordWasProvided (userParams : CreateUserAccountParams) : void {
-      if (userParams.kind !== AccountKind.Local || (userParams.kind === AccountKind.Local && userParams.password)) return
+    function checkIfPasswordWasProvidedWhenCreatingLocalAccount (userParams : CreateUserAccountParams) : void {
+      if (notLocalAccount() || (localAccount() && userParams.password)) return
 
       throw new RepositoryError('É necessário fornecer uma senha para criar a conta do usuário', RepositoryErrorKind.MissingInfo)
+
+      function notLocalAccount () : boolean {
+        return userParams.kind !== AccountKind.Local
+      }
+
+      function localAccount () : boolean {
+        return userParams.kind !== AccountKind.Local
+      }
     }
 
     async function getUserWithUIDIfExists (email: string) : Promise<UserDocument> {
