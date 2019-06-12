@@ -13,9 +13,10 @@ const ButtonQuarternaryDanger = css`
 
 export const Container = styled.button<Props>`
   color: ${props => props.theme.colors.white};
+  font-weight: 600;
   padding: 8px 24px;
-  background-color: #365DF0;
-  color: #FFFFFF;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
   font-size: 18px;
   border-radius: 5px;
   min-width: 150px;
@@ -24,16 +25,16 @@ export const Container = styled.button<Props>`
 
   ${props => !props.kind && css`
     &:hover {
-      background-color: #2F55CC;
+      background-color: ${props.theme.colors.darkPrimary};
     }
 
     &:active {
-      background-color: #244AA8;
+      background-color: ${props.theme.colors.darkerPrimary};
     }
 
     &:disabled {
-      background-color: #B9C6FA;
-      color: #E1E7FD;
+      background-color: ${props.theme.colors.lighterPrimary};
+      color: ${props.theme.colors.mostLightestPrimary};
     }
   `}
   

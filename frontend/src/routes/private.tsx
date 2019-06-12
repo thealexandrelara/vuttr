@@ -6,6 +6,8 @@ import {
   RouteComponentProps,
 } from 'react-router-dom'
 
+import store from '../store'
+
 interface OwnProps extends RouteProps {
   component:
     | React.ComponentType<RouteComponentProps<any>>
@@ -18,7 +20,7 @@ const PrivateRoute: FunctionComponent<OwnProps> = ({
 } : OwnProps) => (
   <Route
     {...rest}
-    render={props => (true ? ( // put your authenticate logic here
+    render={props => (store.getState().auth.signedIn ? ( // put your authenticate logic here
       <Component {...props} />
         ) : (
           <Redirect

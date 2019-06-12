@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Container } from './styles'
 
-import TextInput from '../../../../components/TextInput'
+import SearchTextInput from '../../../../components/SearchTextInput'
 
 function Search() {
-  return <Container><TextInput /></Container>
+  return <Container><SearchTextInput /></Container>
 }
 
 export default Search

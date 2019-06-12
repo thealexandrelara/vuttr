@@ -10,14 +10,14 @@ import GuestRoute from './guest'
 
 function Routes() {
   return (
-    <Router>
+    <>
       <Switch>
-        <PrivateRoute exact path="/" component={Home} />
         <GuestRoute exact path="/login" component={Login} />
         <GuestRoute exact path="/signup" component={SignUp} />
+        <PrivateRoute exact path="/" component={Home} />
       </Switch>
 
-    </Router>
+    </>
   )
 }
 

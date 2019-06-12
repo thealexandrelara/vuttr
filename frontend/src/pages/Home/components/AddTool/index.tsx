@@ -25,10 +25,10 @@ const AddTool : FunctionComponent = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {formikProps => (
             <Form>
-              <TextInput label="Tool Name" />
-              <TextInput label="Tool Link" />
-              <TextInput label="Tool Description" />
-              <TextInput label="Tags" />
+              <TextInput name="toolName" label="Tool Name" />
+              <TextInput name="toolLink" label="Tool Link" />
+              <TextInput name="toolDescription" label="Tool Description" />
+              <TextInput name="tags" label="Tags" />
               <Button type="submit">Add tool</Button>
             </Form>
 )}
