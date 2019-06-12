@@ -49,7 +49,7 @@ class UserRepository {
       }
 
       function localAccount () : boolean {
-        return userParams.kind !== AccountKind.Local
+        return userParams.kind === AccountKind.Local
       }
     }
 
