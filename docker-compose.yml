@@ -27,6 +27,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     command: yarn start
+    env_file:
+      - ./frontend/.env
     ports:
       - "3001:3000"
     volumes:
