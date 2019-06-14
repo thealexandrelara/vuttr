@@ -5,8 +5,10 @@ import {
 } from './styles'
 import { Props } from './types'
 
-const Button: FunctionComponent<Props> = ({ children, type, kind }: Props) => (
-  <Container kind={kind} type={type}>
+const Button: FunctionComponent<Props> = ({
+ children, type, onClick, kind,
+}: Props) => (
+  <Container kind={kind} type={type} onClick={onClick}>
     {children}
   </Container>
 )

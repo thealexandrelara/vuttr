@@ -14,7 +14,7 @@ const ButtonQuarternaryDanger = css`
 export const Container = styled.button<Props>`
   color: ${props => props.theme.colors.white};
   font-weight: 600;
-  padding: 8px 24px;
+  padding: 14px 30px;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.white};
   font-size: 18px;

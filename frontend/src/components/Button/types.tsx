@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 interface OwnProps {
   children: ReactNode,
@@ -6,4 +6,4 @@ interface OwnProps {
   type?: 'button' | 'reset' | 'submit' | undefined,
 }
 
-export type Props = OwnProps
+export type Props = OwnProps & React.HTMLProps<HTMLButtonElement>

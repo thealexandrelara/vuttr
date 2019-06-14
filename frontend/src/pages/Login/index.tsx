@@ -3,6 +3,9 @@ import { Formik, FormikHelpers, useField } from 'formik'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
 
+import GoogleLogin from 'react-google-login'
+// @ts-ignore
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { localSignInRequest } from '../../store/ducks/auth/actions'
 
 import {
@@ -14,6 +17,9 @@ import { loginValidationSchema } from './validators'
 import TextInput from '../../components/TextInput'
 import Button from '../../components/Button'
 import Divider from '../../components/Divider'
+import authConfig from '../../config/auth'
+
+console.log('authConfig', authConfig)
 
 const initialValues = {
   email: '',
@@ -29,14 +35,41 @@ const Login = () => {
     console.log('values', values)
   }
 
+  function responseFacebook() {
+
+  }
+
+  function responseGoogle() {
+
+  }
+  function failureResponseGoogle() {
+
+  }
+
   return (
     <Container>
       <Content>
         <FormContainer>
           <Title>Entrar com</Title>
           <SocialButtonsContainer>
-            <Button type="button">Facebook</Button>
-            <Button type="button">Google</Button>
+            <FacebookLogin
+              appId={authConfig.facebook.appId}
+              callback={responseFacebook}
+              render={(renderProps : any) => (
+                <Button type="button" onClick={renderProps.onClick}>Facebook</Button>
+                )}
+            />
+
+            <GoogleLogin
+              clientId={authConfig.google.clientId || ''}
+              onSuccess={responseGoogle}
+              onFailure={failureResponseGoogle}
+              render={(renderProps : any) => (
+                <Button type="button" onClick={renderProps.onClick}>Google</Button>
+                )}
+            />
+
+
           </SocialButtonsContainer>
           <Divider text="OU" />
           <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={loginValidationSchema}>

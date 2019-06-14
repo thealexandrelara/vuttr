@@ -2,6 +2,9 @@ import React from 'react'
 import { Formik, FormikHelpers } from 'formik'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
+import GoogleLogin from 'react-google-login'
+// @ts-ignore
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 import {
  Container, Content, Form, FormContainer, Title, SocialButtonsContainer,
@@ -14,6 +17,7 @@ import Button from '../../components/Button'
 
 import Divider from '../../components/Divider'
 import { localSignUpRequest } from '../../store/ducks/auth/actions'
+import authConfig from '../../config/auth'
 
 const initialValues: SignUpFormValues = {
     firstName: '',
@@ -30,14 +34,54 @@ const SignUp = () => {
     dispatch(localSignUpRequest(values))
   }
 
+
+  const responseFacebook = (response : any) => {
+    const { accessToken } = response
+
+    console.log('response', response)
+    // if (accessToken) {
+    //   const { state: routeState } = location
+    //   oauthSignInRequest({ accessToken, kind: 'facebook' }, routeState)
+    // }
+  }
+
+  const responseGoogle = (response : any) => {
+    const { accessToken } = response
+
+    console.log('response', response)
+
+    // if (accessToken) {
+    //   const { state: routeState } = location
+    //   oauthSignInRequest({ accessToken, kind: 'google' }, routeState)
+    // }
+  }
+
+  const failureResponseGoogle = (response : any) => {
+    console.log(response)
+  }
+
   return (
     <Container>
       <Content>
         <FormContainer>
           <Title>Cadastrar com</Title>
           <SocialButtonsContainer>
-            <Button type="button">Facebook</Button>
-            <Button type="button">Google</Button>
+            <FacebookLogin
+              appId={authConfig.facebook.appId}
+              callback={responseFacebook}
+              render={(renderProps : any) => (
+                <Button type="button" onClick={renderProps.onClick}>Facebook</Button>
+                )}
+            />
+
+            <GoogleLogin
+              clientId={authConfig.google.clientId || ''}
+              onSuccess={responseGoogle}
+              onFailure={failureResponseGoogle}
+              render={(renderProps : any) => (
+                <Button type="button" onClick={renderProps.onClick}>Google</Button>
+                )}
+            />
           </SocialButtonsContainer>
           <Divider text="OU" />
           <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={signUpValidationSchema}>
