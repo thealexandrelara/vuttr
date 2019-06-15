@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import GoogleLogin from 'react-google-login'
 // @ts-ignore
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { localSignInRequest } from '../../store/ducks/auth/actions'
+import { localSignInRequest, oauthSignInRequest } from '../../store/ducks/auth/actions'
 
 import {
  Container, Content, Form, FormContainer, Title, SocialButtonsContainer,
@@ -35,13 +35,24 @@ const Login = () => {
     console.log('values', values)
   }
 
-  function responseFacebook() {
+  const responseFacebook = (response : any) => {
+    const { accessToken } = response
 
+    if (accessToken) {
+      console.log('response', response)
+      dispatch(oauthSignInRequest('facebook', accessToken))
+    }
   }
 
-  function responseGoogle() {
+  const responseGoogle = (response : any) => {
+    const { accessToken } = response
 
+    if (accessToken) {
+      console.log('response', response)
+      dispatch(oauthSignInRequest('google', accessToken))
+    }
   }
+
   function failureResponseGoogle() {
 
   }

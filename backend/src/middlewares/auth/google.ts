@@ -26,9 +26,8 @@ passport.use(
       }
 
       function extractUserName (profile) : { firstName: string, lastName: string} {
-        const userName = profile.name.split(' ')
         const { given_name: givenName, family_name: familyName } = profile.name || { given_name: undefined, family_name: undefined }
-        const name = { firstName: givenName || userName[0], lastName: familyName || userName[userName.length - 1] }
+        const name = { firstName: givenName, lastName: familyName }
 
         return name
       }

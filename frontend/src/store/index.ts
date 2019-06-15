@@ -3,18 +3,13 @@ import {
 } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'connected-react-router'
-import { ToolsState } from './ducks/tools/interfaces'
-import { AuthState } from './ducks/auth/types'
 
+import { ApplicationState } from './types'
 import createRootReducer from './ducks/rootReducer'
 import rootSaga from './ducks/rootSaga'
 
 import history from '../routes/history'
 
-export interface ApplicationState {
-  auth: AuthState,
-  tools: ToolsState
-}
 
 const middlewares = []
 

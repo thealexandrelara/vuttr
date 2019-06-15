@@ -9,10 +9,9 @@ class AuthRoutes {
   public get router () : express.Router {
     const router = express.Router()
 
-    router.post('/local', celebrate(validator.signIn), authMiddleware.local, handle(AuthController.localSignIn))
-    // router.post('/', celebrate(validator.store), handle(ToolController.store))
-    // router.get('/:id', celebrate(validator.show), handle(ToolController.show))
-    // router.delete('/:id', handle(ToolController.destroy))
+    router.post('/local', celebrate(validator.signIn), authMiddleware.local, handle(AuthController.signIn))
+    router.get('/google', celebrate(validator.oauthSignIn), authMiddleware.google, handle(AuthController.signIn))
+    router.get('/facebook', celebrate(validator.oauthSignIn), authMiddleware.facebook, handle(AuthController.signIn))
 
     return router
   }

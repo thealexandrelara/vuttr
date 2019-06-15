@@ -4,8 +4,4 @@ export interface GlobalStateProps {
   tools?: Tool[]
 }
 
-export interface DispatchProps {
-  getToolsRequest() : void
-}
-
-export type Props = GlobalStateProps & DispatchProps
+export type Props = GlobalStateProps

@@ -16,7 +16,7 @@ import TextInput from '../../components/TextInput'
 import Button from '../../components/Button'
 
 import Divider from '../../components/Divider'
-import { localSignUpRequest } from '../../store/ducks/auth/actions'
+import { localSignUpRequest, oauthSignInRequest } from '../../store/ducks/auth/actions'
 import authConfig from '../../config/auth'
 
 const initialValues: SignUpFormValues = {
@@ -34,15 +34,13 @@ const SignUp = () => {
     dispatch(localSignUpRequest(values))
   }
 
-
   const responseFacebook = (response : any) => {
     const { accessToken } = response
 
     console.log('response', response)
-    // if (accessToken) {
-    //   const { state: routeState } = location
-    //   oauthSignInRequest({ accessToken, kind: 'facebook' }, routeState)
-    // }
+    if (accessToken) {
+      oauthSignInRequest('facebook', accessToken)
+    }
   }
 
   const responseGoogle = (response : any) => {
@@ -50,10 +48,9 @@ const SignUp = () => {
 
     console.log('response', response)
 
-    // if (accessToken) {
-    //   const { state: routeState } = location
-    //   oauthSignInRequest({ accessToken, kind: 'google' }, routeState)
-    // }
+    if (accessToken) {
+      oauthSignInRequest('google', accessToken)
+    }
   }
 
   const failureResponseGoogle = (response : any) => {

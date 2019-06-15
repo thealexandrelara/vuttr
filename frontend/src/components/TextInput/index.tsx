@@ -13,6 +13,8 @@ import { Props } from './types'
 const TextInput: FunctionComponent<Props> = ({ label, name } : Props) => {
   const [field, meta] = useField(name)
 
+  console.log('name', name)
+
   return (
     <Container>
       {label && <Label error={!!meta.error && !!meta.touched}>{label}</Label>}
@@ -22,4 +24,4 @@ const TextInput: FunctionComponent<Props> = ({ label, name } : Props) => {
   )
 }
 
-export default TextInput
+export default React.memo(TextInput)

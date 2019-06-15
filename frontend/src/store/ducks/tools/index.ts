@@ -10,6 +10,8 @@ const INITIAL_STATE: ToolsState = {
 
 const reducer: Reducer<ToolsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case ToolsTypes.ADD_TOOL_SUCCESS:
+      return { ...state, data: [action.payload.tool, ...state.data] }
     case ToolsTypes.GET_TOOLS_REQUEST:
       return { ...state, loading: true }
     case ToolsTypes.GET_TOOLS_SUCCESS:
@@ -26,3 +28,7 @@ const reducer: Reducer<ToolsState> = (state = INITIAL_STATE, action) => {
 }
 
 export default reducer
+
+export const selectors = {
+  getTools: (state : ToolsState) => state,
+}

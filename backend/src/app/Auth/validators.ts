@@ -7,6 +7,13 @@ const signIn = {
   }
 }
 
+const oauthSignIn = {
+  query: {
+    access_token: Joi.string().required()
+  }
+}
+
 export default {
-  signIn
+  signIn,
+  oauthSignIn
 }

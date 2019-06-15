@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import React, { useMemo, FunctionComponent } from 'react'
+import { useField } from 'formik'
 
 import {
  Container,
@@ -9,12 +10,18 @@ import {
 
 import { Props } from './types'
 
-const TextAreaInput: FunctionComponent<Props> = ({ label, error, errorMessage } : Props) => (
-  <Container>
-    {label && <Label error={error}>{label}</Label>}
-    <Input placeholder="Required..." error={error} />
-    {error && <ErrorLabel error={error}>{errorMessage}</ErrorLabel>}
-  </Container>
-)
+const TextAreaInput: FunctionComponent<Props> = ({ label, name } : Props) => {
+  const [field, meta] = useField(name)
+  const hasError = useMemo(() => !!meta.error && !!meta.touched, [meta.error, meta.touched])
 
-export default TextAreaInput
+
+  return (
+    <Container>
+      {label && <Label error={hasError}>{label}</Label>}
+      <Input placeholder="Required..." {...field} error={hasError} />
+      {hasError ? <ErrorLabel error={hasError}>{meta.error}</ErrorLabel> : null}
+    </Container>
+  )
+}
+
+export default React.memo(TextAreaInput)

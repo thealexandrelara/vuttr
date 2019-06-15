@@ -16,15 +16,17 @@ export const Label = styled.p<Props>`
   
 `
 
-export const Input = styled.textarea<Props>`
+export const Input = styled.textarea.attrs({ rows: 4 })<Props>`
   margin-top: 8px;
   font-size: 20px;
-  height: 50px;
+  min-height: 100px;
   color: ${props => props.theme.colors.ink};
   background-color: ${props => props.theme.colors.darkerWhite};
   border: 1px solid ${props => props.theme.colors.darkestWhite};
   border-radius: 5px;
   padding: 16px;
+  resize: vertical;
+
 
   ::placeholder,
   ::-webkit-input-placeholder {

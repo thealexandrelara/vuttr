@@ -5,3 +5,4 @@ import { Tool } from './interfaces'
 export const getToolsRequest = () => action(ToolsTypes.GET_TOOLS_REQUEST)
 export const getToolsSuccess = (data: Tool[]) => action(ToolsTypes.GET_TOOLS_SUCCESS, { data })
 export const getToolsError = () => action(ToolsTypes.GET_TOOLS_ERROR)
+export const addToolSuccess = (tool: Tool) => action(ToolsTypes.ADD_TOOL_SUCCESS, { tool })
