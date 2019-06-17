@@ -1,36 +1,47 @@
-import React, { FunctionComponent } from 'react'
-import { Formik } from 'formik'
+import React, { useState, FunctionComponent } from 'react'
+// @ts-ignore
+import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 
-import { Container, Form, modalStyles } from './styles'
+import { Container, modalStyles } from './styles'
+import { Props } from './types'
 
 import Button from '../../../../../../../../components/Button'
 
-import TextInput from '../../../../../../../../components/TextInput'
+import api from '../../../../../../../../services/api'
+import * as ToolsActions from '../../../../../../../../store/ducks/tools/actions'
 
-const RemoveTool : FunctionComponent = () => {
-  const initialValues = {
+const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
+  const dispatch = useDispatch()
+  const [isOpen, setIsOpen] = useState(false)
 
+  async function handleRemove() {
+    try {
+      const response = api.delete(`/tools/${id}`)
+      // @ts-ignore
+      dispatch(ToolsActions.removeToolSuccess(id))
+      setIsOpen(false)
+    } catch (error) {
+
+    }
   }
 
-  function handleSubmit() {
+  function openModal() {
+    setIsOpen(true)
+  }
 
+  function closeModal() {
+    setIsOpen(false)
   }
 
   return (
     <Container>
-      <Button>remove</Button>
-      <Modal isOpen={false} style={modalStyles}>
+      <Button kind="quaternary-danger" onClick={openModal}>remove</Button>
+      <Modal isOpen={isOpen} onRequestClose={closeModal} style={modalStyles}>
         <div>Teste</div>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {formikProps => (
-            <Form>
-              <p>Are you sure you want to remove hotel?</p>
-              <Button type="button">Cancel</Button>
-              <Button type="submit">Yes, remove</Button>
-            </Form>
-)}
-        </Formik>
+        <p>Are you sure you want to remove hotel?</p>
+        <Button type="button" kind="secondary-neutral" onClick={closeModal}>Cancel</Button>
+        <Button type="button" kind="primary-danger" onClick={handleRemove}>Yes, remove</Button>
       </Modal>
     </Container>
   )

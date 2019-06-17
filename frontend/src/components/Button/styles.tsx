@@ -5,6 +5,44 @@ interface Props {
   type?: 'button' | 'reset' | 'submit' | undefined;
 }
 
+const ButtonSecondaryNeutral = css`
+  color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.mostLightestPrimary};
+  font-weight: 600;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightestPrimary};
+  }
+
+  &:active {
+    background-color: ${props => props.theme.colors.lighterPrimary};
+  }
+
+  &:disabled {
+    background-color: ${props => props.theme.colors.mostLightestPrimary};
+    color: ${props => props.theme.colors.lighterPrimary};
+  }
+`
+
+const ButtonPrimaryDanger = css`
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.danger};
+  font-weight: 600;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.darkerDanger};
+  }
+
+  &:active {
+    background-color: ${props => props.theme.colors.darkDanger};
+  }
+
+  &:disabled {
+    background-color: ${props => props.theme.colors.lightDanger};
+    color: ${props => props.theme.colors.mostLightestDanger};
+  }
+`
+
 const ButtonQuarternaryDanger = css`
   color: ${props => props.theme.colors.danger};
   background-color: transparent;
@@ -39,5 +77,7 @@ export const Container = styled.button<Props>`
   `}
   
 
+  ${props => props.kind === 'secondary-neutral' && ButtonSecondaryNeutral}
   ${props => props.kind === 'quaternary-danger' && ButtonQuarternaryDanger}
+  ${props => props.kind === 'primary-danger' && ButtonPrimaryDanger}
 `

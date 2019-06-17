@@ -1,4 +1,4 @@
-import baseStyled, { ThemeProviderProps, ThemedStyledInterface } from 'styled-components'
+import { ThemeProviderProps } from 'styled-components'
 
 export const theme = {
   colors: {
@@ -54,4 +54,3 @@ export const theme = {
 
 type InnerTheme = typeof theme
 export type Theme = ThemeProviderProps<InnerTheme, InnerTheme>
-// export const styled = baseStyled as ThemedStyledInterface<Theme>

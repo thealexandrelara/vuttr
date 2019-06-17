@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Tag as AntTag } from 'antd'
 
 export const Container = styled.div`
   background-color: #fff;
@@ -6,6 +7,7 @@ export const Container = styled.div`
   padding: 2.5rem;
   border: 1px solid ${props => props.theme.colors.darkestWhite};
   border-radius: 5px;
+  margin-top: 20px;
 `
 
 export const HeaderContainer = styled.div`
@@ -26,6 +28,6 @@ export const TagsContainer = styled.div`
   margin-top: 20px;
 `
 
-export const Tag = styled.span`
+export const Tag = styled(AntTag)`
   margin: 4px 4px;
 `

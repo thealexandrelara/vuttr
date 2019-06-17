@@ -1,6 +1,13 @@
+
+
+interface Tag {
+  id: number
+  tag: string
+}
+
 export interface AddToolFormValues {
-  toolName: string
-  toolLink: string
-  toolDescription: string
-  tags: string
+  title: string
+  description: string
+  link: string
+  tags: string[]
 }

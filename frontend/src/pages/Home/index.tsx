@@ -32,7 +32,7 @@ const Home = () => {
           <Search />
           <AddTool>Add</AddTool>
         </ToolbarContainer>
-        <ToolList tools={tools} />
+        <ToolList tools={tools.data} />
       </Content>
     </Container>
   )

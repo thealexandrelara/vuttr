@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 interface OwnProps {
   children: ReactNode,
-  kind?: string,
+  kind?: 'secondary-neutral' | 'quaternary-danger' | 'primary-danger' | undefined,
   type?: 'button' | 'reset' | 'submit' | undefined,
 }
 
