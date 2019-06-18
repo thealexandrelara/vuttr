@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 
 interface Props {
-  kind?: string;
-  type?: 'button' | 'reset' | 'submit' | undefined;
+  kind?: string
+  type?: 'button' | 'reset' | 'submit' | undefined
+  hasIcon?: boolean
 }
 
 const ButtonSecondaryNeutral = css`
@@ -47,6 +48,8 @@ const ButtonQuarternaryDanger = css`
   color: ${props => props.theme.colors.danger};
   background-color: transparent;
   font-weight: 600;
+  padding: 14px 0;
+  min-width: auto;
 `
 
 export const Container = styled.button<Props>`
@@ -60,6 +63,13 @@ export const Container = styled.button<Props>`
   min-width: 150px;
   border: 0;
   max-height: 50px;
+
+  ${props => props.hasIcon && css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  `}
 
   ${props => !props.kind && css`
     &:hover {

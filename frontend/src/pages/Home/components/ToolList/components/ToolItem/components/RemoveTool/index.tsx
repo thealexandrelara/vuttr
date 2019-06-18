@@ -3,11 +3,14 @@ import React, { useState, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 
-import { Container, modalStyles } from './styles'
+import {
+ Container, HeaderContainer, Title, modalStyles,
+} from './styles'
 import { Props } from './types'
 
 import Button from '../../../../../../../../components/Button'
 
+import { ReactComponent as CloseIcon } from '../../../../../../../../assets/icons/close.svg'
 import api from '../../../../../../../../services/api'
 import * as ToolsActions from '../../../../../../../../store/ducks/tools/actions'
 
@@ -36,9 +39,16 @@ const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
 
   return (
     <Container>
-      <Button kind="quaternary-danger" onClick={openModal}>remove</Button>
+      <Button kind="quaternary-danger" onClick={openModal} hasIcon>
+        <CloseIcon className="button-icon" />
+        {' '}
+        remove
+      </Button>
       <Modal isOpen={isOpen} onRequestClose={closeModal} style={modalStyles}>
-        <div>Teste</div>
+        <HeaderContainer>
+          <CloseIcon className="close-icon" />
+          <Title>Remove tool</Title>
+        </HeaderContainer>
         <p>Are you sure you want to remove hotel?</p>
         <Button type="button" kind="secondary-neutral" onClick={closeModal}>Cancel</Button>
         <Button type="button" kind="primary-danger" onClick={handleRemove}>Yes, remove</Button>

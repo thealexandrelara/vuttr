@@ -6,9 +6,9 @@ import {
 import { Props } from './types'
 
 const Button: FunctionComponent<Props> = ({
- children, type, onClick, kind,
+ children, type, onClick, kind, hasIcon,
 }: Props) => (
-  <Container kind={kind} type={type} onClick={onClick}>
+  <Container kind={kind} type={type} onClick={onClick} hasIcon={hasIcon}>
     {children}
   </Container>
 )

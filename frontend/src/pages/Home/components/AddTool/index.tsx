@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux'
 import { Formik, FormikHelpers, FormikProps } from 'formik'
 import Modal from 'react-modal'
 
-import { Container, Form, modalStyles } from './styles'
+import {
+ Container, Form, HeaderContainer, Title, modalStyles,
+} from './styles'
 
 import { addToolValidationSchema } from './validators'
 import { AddToolFormValues } from './types'
@@ -14,6 +16,7 @@ import TextInput from '../../../../components/TextInput'
 import TextAreaInput from '../../../../components/TextAreaInput'
 import TagsInput from '../../../../components/TagsInput'
 
+import { ReactComponent as CloseIcon } from '../../../../assets/icons/close.svg'
 import api from '../../../../services/api'
 import * as ToolsActions from '../../../../store/ducks/tools/actions'
 
@@ -53,9 +56,15 @@ const AddTool : FunctionComponent = () => {
 
   return (
     <Container>
-      <Button onClick={openModal}>Add</Button>
+      <Button onClick={openModal} hasIcon>
+        <CloseIcon className="button-icon" />
+        Add
+      </Button>
       <Modal isOpen={isOpen} style={modalStyles} onRequestClose={closeModal}>
-        <div>Teste</div>
+        <HeaderContainer>
+          <CloseIcon className="close-icon" />
+          <Title>Add new tool</Title>
+        </HeaderContainer>
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={addToolValidationSchema}>
           {formikProps => (
             <Form>

@@ -10,6 +10,7 @@ export const Container = styled.div`
 `
 
 export const Label = styled.p<Props>`
+  margin-bottom: 0;
   font-size: 20px;
   font-weight: 600;
   color: ${props => props.theme.colors.ink};
