@@ -10,12 +10,14 @@ import {
 
 import { Props } from './types'
 
-const SearchTextInput: FunctionComponent<Props> = ({ label, error, errorMessage } : Props) => (
-    <Container>
-      {label && <Label error={error}>{label}</Label>}
-      <Input placeholder="Required..." error={error} />
-      {error ? <ErrorLabel error={error}>{errorMessage}</ErrorLabel> : null}
-    </Container>
+const SearchTextInput: FunctionComponent<Props> = ({
+ placeholder, label, error, errorMessage, onChange, value, searchInputRef,
+} : Props) => (
+  <Container>
+    {label && <Label error={error}>{label}</Label>}
+    <Input ref={searchInputRef} placeholder={placeholder} error={error} onChange={onChange} />
+    {error ? <ErrorLabel error={error}>{errorMessage}</ErrorLabel> : null}
+  </Container>
   )
 
 export default SearchTextInput

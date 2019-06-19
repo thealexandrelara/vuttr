@@ -3,7 +3,8 @@ import { ToolDocument } from '../interfaces'
 
 interface GetAllToolsContext {
   requestQuery?: {
-    tag?: string
+    tag?: string,
+    search?: string,
   }
 }
 

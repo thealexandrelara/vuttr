@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import searchIcon from '../../assets/icons/search.svg'
 
 interface Props {
   error?: boolean
@@ -24,7 +25,11 @@ export const Input = styled.input<Props>`
   background-color: ${props => props.theme.colors.darkerWhite};
   border: 1px solid ${props => props.theme.colors.darkestWhite};
   border-radius: 5px;
-  padding: 16px;
+  padding: 16px 16px 16px 40px;
+  background-image: url(${searchIcon});
+  background-repeat: no-repeat;
+  background-position: 7px 12px;
+  background-size: 25px 25px;
 
   ::placeholder,
   ::-webkit-input-placeholder {

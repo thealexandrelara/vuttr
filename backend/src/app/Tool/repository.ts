@@ -16,13 +16,24 @@ class ToolRepository {
 
     function createQueryFromRequestQuery ({ requestQuery }) : {} {
       if (!requestQuery) { return {} }
-      const result : { tags?: string } = { }
+      const result : { tags?: string, $or?: string | {}[] } = { }
 
       if (requestQuery.tag) {
         result.tags = requestQuery.tag
       }
 
+      if (requestQuery.search) {
+        result.$or = [createFieldSearchRegex('title'),
+          createFieldSearchRegex('link'),
+          createFieldSearchRegex('description'),
+          createFieldSearchRegex('tags')]
+      }
+
       return result
+
+      function createFieldSearchRegex (field) : {} {
+        return { [field]: { $regex: requestQuery.search, $options: 'i' } }
+      }
     }
   }
 

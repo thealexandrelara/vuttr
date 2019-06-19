@@ -2,7 +2,8 @@ import { Joi } from 'celebrate'
 
 const index = {
   query: {
-    tag: Joi.string()
+    tag: Joi.string().allow(['', null]),
+    search: Joi.string().allow(['', null])
   }
 }
 

@@ -14,8 +14,10 @@ const reducer: Reducer<ToolsState> = (state = INITIAL_STATE, action) => {
       return { ...state, data: [action.payload.tool, ...state.data] }
     case ToolsTypes.REMOVE_TOOL_SUCCESS:
       return { ...state, data: state.data.filter(tool => tool._id !== action.payload.id) }
+    case ToolsTypes.SEARCH_TOOLS_REQUEST:
     case ToolsTypes.GET_TOOLS_REQUEST:
       return { ...state, loading: true }
+    case ToolsTypes.SEARCH_TOOLS_SUCCESS:
     case ToolsTypes.GET_TOOLS_SUCCESS:
       return {
         ...state, loading: false, error: false, data: action.payload.data,
