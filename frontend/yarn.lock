@@ -1433,6 +1433,14 @@
     "@types/prop-types" "*"
     "@types/react" "*"
 
+"@types/react-redux-toastr@^7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-redux-toastr/-/react-redux-toastr-7.4.1.tgz#999dc1a298a2cebbd03ad615c339382e7fac7f77"
+  integrity sha512-6yV8Vq1XeJx2mnwHEdsbgcvnPgOdgDUHUV/z/ZrXvnJ1VUhGZjzBM30ywb6YK/CqdEghxFIEmk4z4JEKvHEo5A==
+  dependencies:
+    "@types/react" "*"
+    redux "^3.6.0 || ^4.0.0"
+
 "@types/react-redux@^7.0.9":
   version "7.0.9"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.9.tgz#4825ee2872c44768916304b6bb8df5b46d443b88"
@@ -4268,7 +4276,7 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-eventemitter3@^3.0.0:
+eventemitter3@^3.0.0, eventemitter3@^3.1.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
@@ -9187,6 +9195,14 @@ react-modal@^3.8.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-redux-toastr@^7.5.1:
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.5.1.tgz#7adc9b21665a0f6656493376b9775ea610a105cb"
+  integrity sha512-1iD0Ci3SznIK+GHAAy0q331W5J9mA2EV7FO/63ajj+AaJjb9h6SAfTjMUxFcpOaEunicUuQjc72p8aEQ8B3qKA==
+  dependencies:
+    classnames "^2.2.3"
+    eventemitter3 "^3.1.0"
+
 react-redux@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0.tgz#72af7cf490a74acdc516ea9c1dd80e25af9ea0b2"
@@ -9400,7 +9416,7 @@ redux-saga@^1.0.2:
   dependencies:
     "@redux-saga/core" "^1.0.2"
 
-"redux@>=0.10 <5", redux@^4.0.0, redux@^4.0.1:
+"redux@>=0.10 <5", "redux@^3.6.0 || ^4.0.0", redux@^4.0.0, redux@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
   integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==

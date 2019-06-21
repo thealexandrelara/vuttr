@@ -2,6 +2,7 @@ import React, { useState, FunctionComponent } from 'react'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
+import { toastr } from 'react-redux-toastr'
 
 import {
  Container, HeaderContainer, Title, ButtonsContainer, modalStyles,
@@ -25,7 +26,7 @@ const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
       dispatch(ToolsActions.removeToolSuccess(id))
       setIsOpen(false)
     } catch (error) {
-
+      toastr.error('Error while removing tool', 'An error has ocurred while removing the tool. Please, try again.')
     }
   }
 

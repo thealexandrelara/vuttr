@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import GoogleLogin from 'react-google-login'
 // @ts-ignore
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { toastr } from 'react-redux-toastr'
 
 import {
  Container, Content, Form, FormContainer, Title, SocialButtonsContainer,
@@ -37,7 +38,6 @@ const SignUp = () => {
   const responseFacebook = (response : any) => {
     const { accessToken } = response
 
-    console.log('response', response)
     if (accessToken) {
       oauthSignInRequest('facebook', accessToken)
     }
@@ -46,7 +46,6 @@ const SignUp = () => {
   const responseGoogle = (response : any) => {
     const { accessToken } = response
 
-    console.log('response', response)
 
     if (accessToken) {
       oauthSignInRequest('google', accessToken)
@@ -54,7 +53,7 @@ const SignUp = () => {
   }
 
   const failureResponseGoogle = (response : any) => {
-    console.log(response)
+    toastr.error('Error on Google authentication', 'An error has ocurred while trying to authenticate with a Google account.')
   }
 
   return (

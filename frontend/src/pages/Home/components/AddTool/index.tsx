@@ -3,6 +3,7 @@ import React, { useState, FunctionComponent, ReactElement } from 'react'
 import { useDispatch } from 'react-redux'
 import { Formik, FormikHelpers, FormikProps } from 'formik'
 import Modal from 'react-modal'
+import { toastr } from 'react-redux-toastr'
 
 import {
  Container, Form, HeaderContainer, Title, Button, modalStyles,
@@ -37,7 +38,7 @@ const AddTool : FunctionComponent = () => {
       dispatch(ToolsActions.addToolSuccess({ ...values }))
       setIsOpen(false)
     } catch (error) {
-
+      toastr.error('Error while adding tool', 'An error has ocurred while adding the tool. Please, try again.')
     }
   }
 

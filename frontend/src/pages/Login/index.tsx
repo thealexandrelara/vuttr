@@ -32,14 +32,12 @@ const Login = () => {
 
   function handleSubmit(values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) {
     dispatch(localSignInRequest(values))
-    console.log('values', values)
   }
 
   const responseFacebook = (response : any) => {
     const { accessToken } = response
 
     if (accessToken) {
-      console.log('response', response)
       dispatch(oauthSignInRequest('facebook', accessToken))
     }
   }
@@ -48,7 +46,6 @@ const Login = () => {
     const { accessToken } = response
 
     if (accessToken) {
-      console.log('response', response)
       dispatch(oauthSignInRequest('google', accessToken))
     }
   }

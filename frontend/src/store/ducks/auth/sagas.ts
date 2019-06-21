@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
+import { actions as toastrActions } from 'react-redux-toastr'
 import api from '../../../services/api'
 
 import { localSignInSuccess, localSignUpSuccess, oauthSignInSuccess } from './actions'
@@ -17,7 +18,13 @@ export function* localSignIn({ payload } : AppAction) {
     yield put(localSignInSuccess(response.data.token))
     yield put(push('/'))
   } catch (err) {
-    console.log(err)
+    yield put(
+      toastrActions.add({
+        type: 'error',
+        title: 'Error',
+        message: 'It was not possible to authenticate. Check your e-mail and password and try again.',
+      }),
+    )
   }
 }
 
@@ -32,15 +39,13 @@ export function* oauthSignIn({ payload } : AppAction) {
     yield put(oauthSignInSuccess(response.data.token))
     yield put(push('/'))
   } catch (err) {
-    console.log('oauthpayloaderror', err)
-    // console.log(err)
-    // yield put(
-    //   toastrActions.add({
-    //     type: 'error',
-    //     title: 'Falha no login',
-    //     message: 'Por favor, tente novamente',
-    //   }),
-    // )
+    yield put(
+      toastrActions.add({
+        type: 'error',
+        title: 'Error',
+        message: 'It was not possible to authenticate. Check your e-mail and password and try again.',
+      }),
+    )
   }
 }
 
@@ -59,6 +64,12 @@ export function* localSignUp({ payload } : AppAction) {
     yield put(localSignUpSuccess(response.data.token))
     yield put(push('/'))
   } catch (err) {
-    console.log(err)
+    yield put(
+      toastrActions.add({
+        type: 'error',
+        title: 'Error',
+        message: 'It was not possible to create your account. Please, try again.',
+      }),
+    )
   }
 }
