@@ -6,9 +6,16 @@ import {
 import { Props } from './types'
 
 const Button: FunctionComponent<Props> = ({
- children, type, onClick, kind, hasIcon,
+ children, type, onClick, kind, hasIcon, style, className,
 }: Props) => (
-  <Container kind={kind} type={type} onClick={onClick} hasIcon={hasIcon}>
+  <Container
+    kind={kind}
+    type={type}
+    onClick={onClick}
+    hasIcon={hasIcon}
+    style={style}
+    className={className}
+  >
     {children}
   </Container>
 )

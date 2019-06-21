@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import { Form as FormikForm } from 'formik'
 import { ReactComponent as CloseIcon } from '../../../../assets/icons/close.svg'
 
+import AppButton from '../../../../components/Button'
+
 export const Container = styled.div`
   .button-icon {
     margin-right: 8px;
@@ -23,6 +25,10 @@ export const Container = styled.div`
 export const Form = styled(FormikForm)`
   display: grid;
   grid-row-gap: 16px;
+`
+
+export const Button = styled(AppButton)`
+  justify-self: end;
 `
 
 export const HeaderContainer = styled.div`
@@ -58,7 +64,7 @@ export const modalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '380px',
-    width: '80%',
+    maxWidth: '480px',
+    width: '90%',
   },
 }

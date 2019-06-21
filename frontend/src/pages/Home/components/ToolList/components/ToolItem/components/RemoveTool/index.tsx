@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 
 import {
- Container, HeaderContainer, Title, modalStyles,
+ Container, HeaderContainer, Title, ButtonsContainer, modalStyles,
 } from './styles'
 import { Props } from './types'
 
@@ -50,8 +50,10 @@ const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
           <Title>Remove tool</Title>
         </HeaderContainer>
         <p>Are you sure you want to remove hotel?</p>
-        <Button type="button" kind="secondary-neutral" onClick={closeModal}>Cancel</Button>
-        <Button type="button" kind="primary-danger" onClick={handleRemove}>Yes, remove</Button>
+        <ButtonsContainer>
+          <Button type="button" kind="secondary-neutral" onClick={closeModal} style={{ marginRight: 8 }}>Cancel</Button>
+          <Button type="button" kind="primary-danger" onClick={handleRemove}>Yes, remove</Button>
+        </ButtonsContainer>
       </Modal>
     </Container>
   )

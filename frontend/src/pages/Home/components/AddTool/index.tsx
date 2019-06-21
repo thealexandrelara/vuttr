@@ -5,13 +5,12 @@ import { Formik, FormikHelpers, FormikProps } from 'formik'
 import Modal from 'react-modal'
 
 import {
- Container, Form, HeaderContainer, Title, modalStyles,
+ Container, Form, HeaderContainer, Title, Button, modalStyles,
 } from './styles'
 
 import { addToolValidationSchema } from './validators'
 import { AddToolFormValues } from './types'
 
-import Button from '../../../../components/Button'
 import TextInput from '../../../../components/TextInput'
 import TextAreaInput from '../../../../components/TextAreaInput'
 import TagsInput from '../../../../components/TagsInput'
@@ -74,7 +73,7 @@ const AddTool : FunctionComponent = () => {
               <TagsInput name="tags" label="Tags" onChange={(value: any) => onTagsChange(value, formikProps)} />
               <Button type="submit">Add tool</Button>
             </Form>
-)}
+          )}
         </Formik>
       </Modal>
     </Container>

@@ -9,9 +9,7 @@ class ToolRoutes {
   public get router () : express.Router {
     const router = express.Router()
 
-    // router.get('/', authMiddleware.jwt, celebrate(validator.index), handle(ToolController.index))
-    // router.post('/', authMiddleware.jwt, celebrate(validator.store), handle(ToolController.store))
-    router.get('/', celebrate(validator.index), handle(ToolController.index))
+    router.get('/', authMiddleware.jwt, celebrate(validator.index), handle(ToolController.index))
     router.post('/', authMiddleware.jwt, celebrate(validator.store), handle(ToolController.store))
     router.get('/:id', authMiddleware.jwt, celebrate(validator.show), handle(ToolController.show))
     router.delete('/:id', authMiddleware.jwt, celebrate(validator.destroy), handle(ToolController.destroy))

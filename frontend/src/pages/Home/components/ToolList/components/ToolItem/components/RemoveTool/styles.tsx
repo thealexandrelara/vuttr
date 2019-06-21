@@ -44,6 +44,12 @@ export const Title = styled.h5`
   margin: 0;
 `
 
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-self: end;
+`
+
 export const modalStyles = {
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.6)',
@@ -55,7 +61,7 @@ export const modalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '380px',
-    width: '80%',
+    maxWidth: '480px',
+    width: '90%',
   },
 }

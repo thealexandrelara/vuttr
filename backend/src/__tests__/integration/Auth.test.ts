@@ -36,12 +36,17 @@ describe('Authentication', () : void => {
 
     it('should not be able to authenticate with invalid credentials', async () : Promise<void> => {
       const repository = new UserRepository({ model: UserModel })
-      const createUserAccountService = new UserServices.CreateUserAccount({ repository: repository })
-      await createUserAccountService.execute({ kind: AccountKind.Local, uid: 'alexandre@reakt.dev', email: 'alexandre@reakt.dev', password: '123456' })
+      const createUserAccountService = new UserServices.CreateUserAccount({ repository })
+      await createUserAccountService.execute({
+        kind: AccountKind.Local,
+        uid: 'alexandre@reakt.dev',
+        email: 'alexandre@reakt.dev',
+        password: '123456'
+      })
 
       const response = await request(app)
         .post('/auth/local')
-        .send({ email: 'alexandre@reakt.dev', password: 'abc' })
+        .send({ email: 'alexandre@reakt.dev', password: 'abc123' })
 
       expect(response.status).toBe(401)
     })

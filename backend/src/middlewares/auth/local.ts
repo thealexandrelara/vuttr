@@ -21,7 +21,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     done(error, false)
   }
 
-  async function checkIfUserPasswordIsCorrect (user : UserDocument, password : string) : boolean {
+  async function checkIfUserPasswordIsCorrect (user : UserDocument, password : string) : Promise<boolean> {
     return user.comparePassword(password)
   }
 }))

@@ -1,13 +1,10 @@
 import styled, { css } from 'styled-components'
-import React from 'react'
-import ReactTags, { ReactTagsProps } from 'react-tag-autocomplete'
 import { Select } from 'antd'
 
 interface Props {
   error?: boolean
 }
 
-type ReactTagProps = ReactTagsProps & Props & React.RefAttributes<ReactTags>
 
 export const Container = styled.div`
   display: flex;
@@ -22,18 +19,50 @@ export const Label = styled.p<Props>`
   
 `
 
+const InputHasError = css`
+  color: ${props => props.theme.colors.danger};
+  background-color: ${props => props.theme.colors.mostLightestDanger};
+  border-color: ${props => props.theme.colors.danger};
+
+  &:hover, &:active, &:focus {
+    background-color: ${props => props.theme.colors.mostLightestDanger};
+    border: 1px solid ${props => props.theme.colors.danger};
+  }
+
+  &:not(:focus){
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    border: 1px solid ${props => props.theme.colors.danger};
+  }
+
+  .ant-select-selection__placeholder{
+    color: ${props => props.theme.colors.lightDanger};
+
+  }
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: ${props => props.theme.colors.lightDanger};
+  }
+
+  :-ms-input-placeholder {
+    color: ${props => props.theme.colors.lightDanger};
+  }
+
+  .ant-select-selection:not(:focus){
+    border-color: ${props => props.theme.colors.danger};
+  }
+`
+
 export const Input = styled(Select)<Props>`
   .ant-select-selection {
     min-height: 50px;
 
-    /* margin-top: 8px; */
     font-size: 20px;
-    /* height: 50px; */
     color: ${props => props.theme.colors.ink};
     background-color: ${props => props.theme.colors.darkerWhite};
     border: 1px solid ${props => props.theme.colors.darkestWhite};
     border-radius: 5px;
-    /* padding: 16px; */
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
 
@@ -59,26 +88,13 @@ export const Input = styled(Select)<Props>`
 
     ${props => !props.error && css` 
       &:focus {
-        background-color: ${props => props.theme.colors.darkestWhite};
-        border-color: ${props => props.theme.colors.mostDarkestWhite};
+        background-color: ${props.theme.colors.darkestWhite};
+        border-color: ${props.theme.colors.mostDarkestWhite};
       }
     `}
     
 
-    ${props => props.error && css`
-      color: ${props.theme.colors.danger}
-      background-color: ${props.theme.colors.mostLightestDanger}
-      border-color: ${props.theme.colors.danger}
-
-      ::placeholder,
-      ::-webkit-input-placeholder {
-        color: ${props.theme.colors.lightDanger};
-      }
-
-      :-ms-input-placeholder {
-        color: ${props.theme.colors.lightDanger};
-      }
-    `}
+    ${props => props.error && InputHasError}
 
     .ant-select-selection__choice {
       border-radius: 5px;

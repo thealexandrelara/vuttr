@@ -15,7 +15,6 @@ function Search() {
   const searchInputRef = useRef<any>()
   const [searchInTagsOnly, setSearchInTagsOnly] = useState(false)
 
-
   const doSearch = _debounce((value, currentSearchTagsOnly?: boolean) => {
     const shouldSearchInTagsOnly = typeof currentSearchTagsOnly === 'boolean' ? currentSearchTagsOnly : searchInTagsOnly
     dispatch(ToolsActions.searchToolsRequest(value, shouldSearchInTagsOnly))
