@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Form as FormikForm } from 'formik'
+import Button from '../../components/Button'
 
 export const Container = styled.div`
   display: grid;
@@ -14,9 +15,16 @@ export const Content = styled.div`
   align-items: center;
 `
 
-export const FormContainer = styled(FormikForm)`
+export const AppTitle = styled.h1`
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 32px;
+`
+
+export const FormContainer = styled.div`
   background-color: white;
-  margin-top: 2.5rem;
+  margin-top: 0;
   padding: 2.5rem;
   border: 1px solid ${props => props.theme.colors.darkestWhite};
   border-radius: 5px;
@@ -35,7 +43,12 @@ export const Form = styled(FormikForm)`
   max-width: 350px;
 `
 
-export const SocialButtonsContainer = styled(FormikForm)`
+export const SocialButtonsContainer = styled.div`
   display: grid;
   grid-row-gap: 16px;
+`
+
+export const CreateAccountButton = styled(Button)`
+  margin: 0 auto;
+  width: 100%;
 `

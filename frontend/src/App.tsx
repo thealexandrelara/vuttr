@@ -3,13 +3,16 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { ConnectedRouter } from 'connected-react-router'
 import ReduxToastr from 'react-redux-toastr'
+import ReactModal from 'react-modal'
 
 import Routes from './routes'
 import store from './store'
 import GlobalStyles from './styles/global'
-import { theme, Theme } from './styles/theme'
+import { theme } from './styles/theme'
 
 import history from './routes/history'
+
+ReactModal.setAppElement('#root')
 
 const App : React.FC = () => (
   <Provider store={store}>
@@ -18,7 +21,7 @@ const App : React.FC = () => (
         timeOut={4000}
         newestOnTop={false}
         preventDuplicates
-        position="top-left"
+        position="top-right"
         transitionIn="fadeIn"
         transitionOut="fadeOut"
         progressBar

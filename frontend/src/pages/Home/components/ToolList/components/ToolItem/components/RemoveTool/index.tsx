@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 import { toastr } from 'react-redux-toastr'
 
 import {
- Container, HeaderContainer, Title, ButtonsContainer, modalStyles,
+ Container, HeaderContainer, Title, Description, ButtonsContainer, modalStyles,
 } from './styles'
 import { Props } from './types'
 
@@ -15,13 +15,13 @@ import { ReactComponent as CloseIcon } from '../../../../../../../../assets/icon
 import api from '../../../../../../../../services/api'
 import * as ToolsActions from '../../../../../../../../store/ducks/tools/actions'
 
-const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
+const RemoveTool : FunctionComponent<Props> = ({ id, title } : Props) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
 
   async function handleRemove() {
     try {
-      const response = api.delete(`/tools/${id}`)
+      await api.delete(`/tools/${id}`)
       // @ts-ignore
       dispatch(ToolsActions.removeToolSuccess(id))
       setIsOpen(false)
@@ -50,7 +50,12 @@ const RemoveTool : FunctionComponent<Props> = ({ id } : Props) => {
           <CloseIcon className="close-icon" />
           <Title>Remove tool</Title>
         </HeaderContainer>
-        <p>Are you sure you want to remove hotel?</p>
+        <Description>
+          Are you sure you want to remove
+          {' '}
+          <b>{title}</b>
+          ?
+        </Description>
         <ButtonsContainer>
           <Button type="button" kind="secondary-neutral" onClick={closeModal} style={{ marginRight: 8 }}>Cancel</Button>
           <Button type="button" kind="primary-danger" onClick={handleRemove}>Yes, remove</Button>

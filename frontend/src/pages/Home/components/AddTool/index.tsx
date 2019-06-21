@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, ReactElement } from 'react'
+import React, { useState, FunctionComponent } from 'react'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
 import { Formik, FormikHelpers, FormikProps } from 'formik'
@@ -10,7 +10,7 @@ import {
 } from './styles'
 
 import { addToolValidationSchema } from './validators'
-import { AddToolFormValues } from './types'
+import { AddToolFormValues, Props } from './types'
 
 import TextInput from '../../../../components/TextInput'
 import TextAreaInput from '../../../../components/TextAreaInput'
@@ -21,7 +21,7 @@ import api from '../../../../services/api'
 import * as ToolsActions from '../../../../store/ducks/tools/actions'
 
 
-const AddTool : FunctionComponent = () => {
+const AddTool : FunctionComponent<Props> = ({ className, style }: Props) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
   const initialValues : AddToolFormValues = {
@@ -31,9 +31,9 @@ const AddTool : FunctionComponent = () => {
     tags: [],
   }
 
-  function handleSubmit(values: AddToolFormValues, actions: FormikHelpers<AddToolFormValues>) {
+  async function handleSubmit(values: AddToolFormValues, actions: FormikHelpers<AddToolFormValues>) {
     try {
-      const response = api.post('/tools', { ...values })
+      await api.post('/tools', { ...values })
       // @ts-ignore
       dispatch(ToolsActions.addToolSuccess({ ...values }))
       setIsOpen(false)
@@ -55,7 +55,7 @@ const AddTool : FunctionComponent = () => {
   }
 
   return (
-    <Container>
+    <Container className={className} style={style}>
       <Button onClick={openModal} hasIcon>
         <CloseIcon className="button-icon" />
         Add

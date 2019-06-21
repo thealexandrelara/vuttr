@@ -13,10 +13,12 @@ export const Container = styled.div`
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 `
 
 export const Title = styled.h3`
+  margin: 0;
 `
 
 export const Description = styled.p`

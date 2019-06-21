@@ -1,5 +1,6 @@
 interface OwnProps {
-  id: string
+  id: string,
+  title: string,
 }
 
 export type Props = OwnProps

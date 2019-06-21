@@ -5,6 +5,8 @@ export enum AuthTypes {
   OAUTH_SUCCESS = '@auth/OAUTH_SUCCESS',
   LOCAL_SIGN_UP_REQUEST = '@auth/LOCAL_SIGN_UP_REQUEST',
   LOCAL_SIGN_UP_SUCCESS = '@auth/LOCAL_SIGN_UP_SUCCESS',
+  LOGOUT_REQUEST = '@auth/LOGOUT_REQUEST',
+  LOGOUT_SUCCESS = '@auth/LOGOUT_SUCCESS',
 }
 
 export interface LocalUserSignInCredentials {

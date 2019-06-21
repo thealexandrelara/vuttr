@@ -1,6 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Form as FormikForm } from 'formik'
-import { ReactComponent as CloseIcon } from '../../../../assets/icons/close.svg'
 
 import AppButton from '../../../../components/Button'
 

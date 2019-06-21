@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { StyledComponent } from 'styled-components'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
@@ -32,7 +31,11 @@ function Search() {
 
   return (
     <Container>
-      <SearchInput searchInputRef={searchInputRef} placeholder="search" onChange={handleSearch} />
+      <SearchInput
+        searchInputRef={searchInputRef}
+        placeholder="search"
+        onChange={handleSearch}
+      />
       <Checkbox style={{ marginLeft: 8 }} checked={searchInTagsOnly} onChange={handleCheckboxChange}>Search in tags only</Checkbox>
     </Container>
 )

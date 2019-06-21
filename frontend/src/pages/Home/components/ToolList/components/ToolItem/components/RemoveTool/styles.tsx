@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Form as FormikForm } from 'formik'
 
 export const Container = styled.div`
@@ -42,6 +42,11 @@ export const HeaderContainer = styled.div`
 
 export const Title = styled.h5`
   margin: 0;
+`
+
+export const Description = styled.p`
+  font-size: 20px;
+  color: ${props => props.theme.colors.lightInk}
 `
 
 export const ButtonsContainer = styled.div`

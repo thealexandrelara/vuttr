@@ -1,6 +1,5 @@
 import React, { useMemo, FunctionComponent } from 'react'
 import { useField } from 'formik'
-import { Select } from 'antd'
 
 import {
  Container,

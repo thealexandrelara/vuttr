@@ -48,8 +48,21 @@ const ButtonQuarternaryDanger = css`
   color: ${props => props.theme.colors.danger};
   background-color: transparent;
   font-weight: 600;
-  padding: 14px 0;
+  padding: 0;
   min-width: auto;
+`
+
+const ButtonQuarternaryNeutral = css`
+  color: ${props => props.theme.colors.primary};
+  background-color: transparent;
+  font-weight: 600;
+  padding: 0;
+  min-width: auto;
+
+  &:disabled {
+    background-color: transparent;
+    color: ${props => props.theme.colors.lightPrimary};
+  }
 `
 
 export const Container = styled.button<Props>`
@@ -88,6 +101,7 @@ export const Container = styled.button<Props>`
   
 
   ${props => props.kind === 'secondary-neutral' && ButtonSecondaryNeutral}
+  ${props => props.kind === 'quaternary-neutral' && ButtonQuarternaryNeutral}
   ${props => props.kind === 'quaternary-danger' && ButtonQuarternaryDanger}
   ${props => props.kind === 'primary-danger' && ButtonPrimaryDanger}
 `

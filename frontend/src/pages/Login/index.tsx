@@ -1,7 +1,8 @@
 import React from 'react'
-import { Formik, FormikHelpers, useField } from 'formik'
+import { Formik, FormikHelpers } from 'formik'
 // @ts-ignore
 import { useDispatch } from 'react-redux'
+import { toastr } from 'react-redux-toastr'
 
 import GoogleLogin from 'react-google-login'
 // @ts-ignore
@@ -9,7 +10,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { localSignInRequest, oauthSignInRequest } from '../../store/ducks/auth/actions'
 
 import {
- Container, Content, Form, FormContainer, Title, SocialButtonsContainer,
+ Container, Content, Form, FormContainer, AppTitle, Title, SocialButtonsContainer, CreateAccountButton,
 } from './styles'
 import { LoginFormValues } from './types'
 import { loginValidationSchema } from './validators'
@@ -19,7 +20,8 @@ import Button from '../../components/Button'
 import Divider from '../../components/Divider'
 import authConfig from '../../config/auth'
 
-console.log('authConfig', authConfig)
+import history from '../../routes/history'
+
 
 const initialValues = {
   email: '',
@@ -51,12 +53,17 @@ const Login = () => {
   }
 
   function failureResponseGoogle() {
+    toastr.error('Error on Google authentication', 'An error has ocurred while trying to authenticate with a Google account.')
+  }
 
+  function handleGoToSignUp() {
+    history.push('/signup')
   }
 
   return (
     <Container>
       <Content>
+        <AppTitle>VUTTR</AppTitle>
         <FormContainer>
           <Title>Entrar com</Title>
           <SocialButtonsContainer>
@@ -84,11 +91,13 @@ const Login = () => {
             {formikProps => (
               <Form>
                 <TextInput name="email" label="Email" />
-                <TextInput name="password" label="Password" />
+                <TextInput name="password" label="Password" type="password" />
                 <Button type="submit">Submit</Button>
               </Form>
   )}
           </Formik>
+
+          <CreateAccountButton type="button" kind="quaternary-neutral" onClick={handleGoToSignUp}>I don't have an account yet!</CreateAccountButton>
 
         </FormContainer>
       </Content>

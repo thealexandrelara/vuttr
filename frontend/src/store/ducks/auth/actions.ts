@@ -11,3 +11,7 @@ export const oauthSignInSuccess = (token: string) => action(AuthTypes.OAUTH_SUCC
 
 export const localSignUpRequest = (data: LocalUserSignUpCredentials) => action(AuthTypes.LOCAL_SIGN_UP_REQUEST, { data })
 export const localSignUpSuccess = (token: string) => action(AuthTypes.LOCAL_SIGN_UP_SUCCESS, { token })
+
+
+export const logoutRequest = () => action(AuthTypes.LOGOUT_REQUEST)
+export const logoutSuccess = () => action(AuthTypes.LOGOUT_SUCCESS)

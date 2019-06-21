@@ -11,3 +11,10 @@ export interface AddToolFormValues {
   link: string
   tags: string[]
 }
+
+export interface OwnProps {
+  className?: string,
+  style?: {}
+}
+
+export type Props = OwnProps

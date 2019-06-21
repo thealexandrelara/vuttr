@@ -8,7 +8,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { toastr } from 'react-redux-toastr'
 
 import {
- Container, Content, Form, FormContainer, Title, SocialButtonsContainer,
+ Container, Content, Form, FormContainer, AppTitle, Title, SocialButtonsContainer, GoToLoginButton,
 } from './styles'
 import { signUpValidationSchema } from './validators'
 import { SignUpFormValues } from './types'
@@ -19,6 +19,8 @@ import Button from '../../components/Button'
 import Divider from '../../components/Divider'
 import { localSignUpRequest, oauthSignInRequest } from '../../store/ducks/auth/actions'
 import authConfig from '../../config/auth'
+
+import history from '../../routes/history'
 
 const initialValues: SignUpFormValues = {
     firstName: '',
@@ -56,9 +58,14 @@ const SignUp = () => {
     toastr.error('Error on Google authentication', 'An error has ocurred while trying to authenticate with a Google account.')
   }
 
+  function handleGoToLogin() {
+    history.push('/login')
+  }
+
   return (
     <Container>
       <Content>
+        <AppTitle>VUTTR</AppTitle>
         <FormContainer>
           <Title>Cadastrar com</Title>
           <SocialButtonsContainer>
@@ -86,13 +93,13 @@ const SignUp = () => {
                 <TextInput name="firstName" label="First Name" />
                 <TextInput name="lastName" label="Last Name" />
                 <TextInput name="email" label="Email" />
-                <TextInput name="password" label="Password" />
-                <TextInput name="passwordConfirmation" label="Password Confirmation" />
+                <TextInput name="password" label="Password" type="password" />
+                <TextInput name="passwordConfirmation" label="Password Confirmation" type="password" />
                 <Button type="submit">Submit</Button>
               </Form>
   )}
           </Formik>
-
+          <GoToLoginButton type="button" kind="quaternary-neutral" onClick={handleGoToLogin}>I already have an account!</GoToLoginButton>
         </FormContainer>
       </Content>
     </Container>

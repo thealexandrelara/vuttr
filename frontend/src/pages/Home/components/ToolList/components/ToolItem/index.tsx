@@ -12,8 +12,8 @@ const ToolItem: FunctionComponent<Props> = ({
 } : Props) => (
   <Container>
     <HeaderContainer>
-      <Title>{title}</Title>
-      <RemoveTool id={id}>remove</RemoveTool>
+      <Title><a href={link} target="_blank" rel="rel noopener noreferrer">{title}</a></Title>
+      <RemoveTool id={id} title={title}>remove</RemoveTool>
     </HeaderContainer>
     <Description>{description}</Description>
     <TagsContainer>

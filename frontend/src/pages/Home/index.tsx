@@ -3,13 +3,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
- Container, Content, Title, Subtitle, ToolbarContainer,
+ Container, Content, HeaderContainer, Title, Subtitle, ToolbarContainer, AddTool,
 } from './styles'
 
 import Search from './components/Search'
 import ToolList from './components/ToolList'
-import AddTool from './components/AddTool'
+import Button from '../../components/Button'
 
+import * as AuthActions from '../../store/ducks/auth/actions'
 import * as ToolsActions from '../../store/ducks/tools/actions'
 import { selectors } from '../../store/ducks/rootReducer'
 
@@ -21,12 +22,17 @@ const Home = () => {
     dispatch(ToolsActions.getToolsRequest())
   }, [dispatch])
 
-  console.log('tools', tools)
+  function handleLogout() {
+    dispatch(AuthActions.logoutRequest())
+  }
 
   return (
     <Container>
       <Content>
-        <Title>VUTTR</Title>
+        <HeaderContainer>
+          <Title>VUTTR</Title>
+          <Button kind="quaternary-neutral" onClick={handleLogout}>Logout</Button>
+        </HeaderContainer>
         <Subtitle>Very Useful Tools to Remember</Subtitle>
         <ToolbarContainer>
           <Search />

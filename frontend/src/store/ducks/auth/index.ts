@@ -14,6 +14,10 @@ const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
       return {
         ...state, token: action.payload.token, signedIn: true,
       }
+    case AuthTypes.LOGOUT_SUCCESS:
+      return {
+        ...state, token: null, signedIn: false,
+      }
     case AuthTypes.OAUTH_REQUEST:
     case AuthTypes.LOCAL_SIGN_IN_REQUEST:
     case AuthTypes.LOCAL_SIGN_UP_REQUEST:
