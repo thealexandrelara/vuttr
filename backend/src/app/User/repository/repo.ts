@@ -36,21 +36,21 @@ class UserRepository {
     function checkIfEmailWasInformed (userParams : CreateUserAccountParams) : void {
       if (userParams.email) return
 
-      throw new RepositoryError('É necessário fornecer um e-mail para criar a conta do usuário', RepositoryErrorKind.MissingInfo)
+      throw new RepositoryError('An e-mail is required to create a user account.', RepositoryErrorKind.MissingInfo)
     }
 
     function checkIfPasswordWasProvidedWhenCreatingLocalAccount (userParams : CreateUserAccountParams) : void {
-      if (notLocalAccount() || (localAccount() && userParams.password)) return
+      if (notLocalAccount(userParams.kind) || (localAccount(userParams.kind) && userParams.password)) return
 
-      throw new RepositoryError('É necessário fornecer uma senha para criar a conta do usuário', RepositoryErrorKind.MissingInfo)
+      throw new RepositoryError('A password is required to create an account', RepositoryErrorKind.MissingInfo)
+    }
 
-      function notLocalAccount () : boolean {
-        return userParams.kind !== AccountKind.Local
-      }
+    function notLocalAccount (kind : string) : boolean {
+      return kind !== AccountKind.Local
+    }
 
-      function localAccount () : boolean {
-        return userParams.kind === AccountKind.Local
-      }
+    function localAccount (kind : string) : boolean {
+      return kind === AccountKind.Local
     }
 
     async function getUserWithUIDIfExists (email: string) : Promise<UserDocument> {
@@ -62,7 +62,8 @@ class UserRepository {
     async function addUserAccountToExistingUser (existingUser: UserDocument, userParams : CreateUserAccountParams) : Promise<void> {
       if (existingUser) {
         const existingAccount = existingUser.accounts.find((account) : boolean => account.kind === userParams.kind)
-        if (existingAccount) throw new RepositoryError('Uma conta com estes dados já existe', RepositoryErrorKind.MissingInfo)
+        if (existingAccount && notLocalAccount(userParams.kind)) return
+        if (existingAccount && localAccount(userParams.kind)) throw new RepositoryError('Account with provided data already exists.', RepositoryErrorKind.MissingInfo)
         const account : Account = { kind: userParams.kind, uid: userParams.uid }
         if (userParams.kind === AccountKind.Local) {
           account.password = userParams.password

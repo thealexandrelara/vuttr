@@ -26,7 +26,6 @@ passport.use(
       }
 
       function extractUserName (profile) : { firstName: string, lastName: string} {
-        console.log('facebookprofile', profile)
         const { given_name: givenName, family_name: familyName } = profile.name || { given_name: undefined, family_name: undefined }
         const name = { firstName: givenName, lastName: familyName }
 

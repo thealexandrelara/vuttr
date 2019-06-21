@@ -57,7 +57,7 @@ class App {
         return res.status(400).json(await youch.toJSON())
       }
 
-      return res.status(err.status || 500).json({ message: 'Erro interno do servidor' })
+      return res.status(err.status || 500).json({ message: 'Internal server error' })
     })
   }
 }

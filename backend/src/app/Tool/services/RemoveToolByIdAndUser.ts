@@ -19,7 +19,7 @@ class RemoveToolByIdAndUser {
     function checkIfToolWasRemoved (tool) : void {
       if (tool) return
 
-      throw new RepositoryError('Não foi possível deletar', RepositoryErrorKind.Forbidden)
+      throw new RepositoryError('Tool cannot be removed', RepositoryErrorKind.Forbidden)
     }
   }
 }
