@@ -20,10 +20,17 @@ First, clone the project:
 git clone https://github.com/thealexandrelara/vuttr
 ```
 
-Access the created folder and execute the project
+Access the created folder and create `.env` files inside `frontend` and `backend` folders following `.env.example` located inside each folder.
 
 ```
 cd vuttr
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+```
+
+Run the application by executing the following docker compose command:
+
+```
 docker-compose up --build -d
 ```
 

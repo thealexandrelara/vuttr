@@ -31,11 +31,16 @@ First, clone the project:
 git clone https://github.com/thealexandrelara/vuttr
 ```
 
-Access the created folder and execute the project
+Access the created folder and create a `.env` file following the same structure as the `.env.example` located on the folder.
 
 ```
 cd vuttr/frontend
+cp .env.example .env
+```
 
+Execute the application:
+
+```
 # if you're using Docker
 docker build -t vuttr-frontend . && docker run -it vuttr-frontend
 
