@@ -27,6 +27,7 @@ cd vuttr
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 ```
+Make sure to provided the needed information to your `.env` files.
 
 Run the application by executing the following docker compose command:
 
