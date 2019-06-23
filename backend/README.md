@@ -48,6 +48,14 @@ yarn dev # or npm run dev
 
 After the installation is finished, you can access the React application through: http://localhost:3000/
 
+### Running tests
+
+You can run the tests with the following command
+
+```
+yarn test # or npm run test
+```
+
 ## Docs
 
 After starting the application, you can access the documentation containing all available resources on the API by accessing: http://localhost:3000/docs
