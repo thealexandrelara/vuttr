@@ -1,10 +1,10 @@
-import UserRepository from '../repository'
+import { UserRepository } from '../repository'
 import { UserDocument } from '../interfaces'
 
 class GetAllUsers {
   private repository: UserRepository
 
-  public constructor ({ repository }) {
+  public constructor ({ repository } : { repository: UserRepository }) {
     this.repository = repository
   }
 

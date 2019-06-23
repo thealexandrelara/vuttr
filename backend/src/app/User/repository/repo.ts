@@ -7,7 +7,7 @@ import RepositoryError, { RepositoryErrorKind } from '../../../utils/RepositoryE
 class UserRepository {
   private model: Model<UserDocument>
 
-  public constructor ({ model }) {
+  public constructor ({ model } : { model: Model<UserDocument>}) {
     this.model = model
   }
 
@@ -17,7 +17,7 @@ class UserRepository {
     return users
   }
 
-  public async getUserById (id : string) : Promise<UserDocument> {
+  public async getUserById (id : string) : Promise<UserDocument | null> {
     const user = await this.model.findById(id)
 
     return user
@@ -53,13 +53,13 @@ class UserRepository {
       return kind === AccountKind.Local
     }
 
-    async function getUserWithUIDIfExists (email: string) : Promise<UserDocument> {
+    async function getUserWithUIDIfExists (email: string | undefined) : Promise<UserDocument | null> {
       const user = await _this.model.findOne({ 'email': email })
 
       return user
     }
 
-    async function addUserAccountToExistingUser (existingUser: UserDocument, userParams : CreateUserAccountParams) : Promise<void> {
+    async function addUserAccountToExistingUser (existingUser: UserDocument | null, userParams : CreateUserAccountParams) : Promise<void> {
       if (existingUser) {
         const existingAccount = existingUser.accounts.find((account) : boolean => account.kind === userParams.kind)
         if (existingAccount && notLocalAccount(userParams.kind)) return
@@ -74,7 +74,7 @@ class UserRepository {
       }
     }
 
-    async function createUserIfNotCreated (existingUser: UserDocument, userParams : CreateUserAccountParams) : Promise<UserDocument> {
+    async function createUserIfNotCreated (existingUser: UserDocument | null, userParams : CreateUserAccountParams) : Promise<UserDocument> {
       if (existingUser) return existingUser
 
       const account : Account = { kind: userParams.kind, uid: userParams.uid }
@@ -87,14 +87,14 @@ class UserRepository {
     }
   }
 
-  public async getUserByAccountKindAndUID (kind, uid, options) : Promise<UserDocument> {
+  public async getUserByAccountKindAndUID (kind : string, uid : string, options : any) : Promise<UserDocument | null> {
     const query = createQueryFromParams()
     const user = options.selectPassword ? this.model.findOne(query).select('+accounts.password') : this.model.findOne(query)
 
     return user
 
     function createQueryFromParams () : {} {
-      const result = {}
+      const result: any = {}
 
       if (kind) {
         result['accounts.kind'] = kind

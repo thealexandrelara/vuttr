@@ -4,7 +4,7 @@ import { UserDocument } from '../interfaces'
 class GetUserById {
   private repository: UserRepository
 
-  public constructor ({ repository }) {
+  public constructor ({ repository } : { repository: UserRepository }) {
     this.repository = repository
   }
 

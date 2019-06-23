@@ -1,6 +1,15 @@
 import { Model } from 'mongoose'
 import { Tool, ToolDocument } from './interfaces'
 
+interface Context {
+  requestQuery: RequestQuery
+}
+
+interface RequestQuery {
+  tag?: string,
+  search?: string,
+}
+
 class ToolRepository {
   private model: Model<ToolDocument>
 
@@ -8,15 +17,15 @@ class ToolRepository {
     this.model = model
   }
 
-  public async getAllTools ({ requestQuery }) : Promise<ToolDocument[]> {
+  public async getAllTools ({ requestQuery } : Context, userId: string) : Promise<ToolDocument[]> {
     const query = createQueryFromRequestQuery({ requestQuery })
-    const tools = await this.model.find(query)
+    const tools = await this.model.find(query).select('-createdAt -updatedAt -__v')
 
     return tools
 
-    function createQueryFromRequestQuery ({ requestQuery }) : {} {
+    function createQueryFromRequestQuery ({ requestQuery } : Context) : {} {
       if (!requestQuery) { return {} }
-      const result : { tags?: string, $or?: string | {}[] } = { }
+      const result : { user: string, tags?: string, $or?: string | {}[] } = { user: userId }
 
       if (requestQuery.tag) {
         result.tags = requestQuery.tag
@@ -31,7 +40,7 @@ class ToolRepository {
 
       return result
 
-      function createFieldSearchRegex (field) : {} {
+      function createFieldSearchRegex (field : string) : {} {
         return { [field]: { $regex: requestQuery.search, $options: 'i' } }
       }
     }
@@ -43,7 +52,7 @@ class ToolRepository {
     return tools
   }
 
-  public async getToolById (id : string) : Promise<ToolDocument> {
+  public async getToolById (id : string) : Promise<ToolDocument | null> {
     const tool = await this.model.findById(id)
 
     return tool
@@ -55,7 +64,7 @@ class ToolRepository {
     return tool
   }
 
-  public async removeToolByIdAndUser (id: string, user: string) : Promise<ToolDocument> {
+  public async removeToolByIdAndUser (id: string, user: string) : Promise<ToolDocument | null> {
     const removedTool = await this.model.findOneAndRemove({ _id: id, user })
 
     return removedTool

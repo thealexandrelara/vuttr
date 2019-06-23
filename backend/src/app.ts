@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import Boom from '@hapi/boom'
 import Youch from 'youch'
 import celebrate from 'celebrate'
+import swaggerUI from 'swagger-ui-express'
 
 import databaseConfig from './config/database'
 import AppRoutes from './routes'
@@ -12,6 +13,7 @@ import './middlewares/auth/jwt'
 import './middlewares/auth/google'
 import './middlewares/auth/facebook'
 import './middlewares/auth/local'
+import swaggerDocument from './swagger.json'
 
 class App {
   public express: express.Application
@@ -28,6 +30,7 @@ class App {
   private setupMiddlewares () : void {
     this.express.use(express.json())
     this.express.use(cors())
+    this.express.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
   }
 
   private setupDatabase () : void {

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 
 import { ApplicationRequest } from '../../contracts/ApplicationRequest'
 
@@ -7,10 +7,11 @@ import ToolRepository from './repository'
 import { CreateTool, GetAllTools, GetToolById, RemoveToolByIdAndUser } from './services'
 
 class ToolController {
-  public async index (req: Request, res: Response) : Promise<Response> {
+  public async index (req: ApplicationRequest, res: Response) : Promise<Response> {
+    const { userId } = req
     const repository = new ToolRepository({ model: ToolModel })
     const getAllToolsService = new GetAllTools({ repository })
-    const tools = await getAllToolsService.execute({ requestQuery: req.query })
+    const tools = await getAllToolsService.execute({ requestQuery: req.query }, userId)
 
     return res.json(tools)
   }
@@ -24,11 +25,11 @@ class ToolController {
     return res.status(201).json(tool)
   }
 
-  public async show (req: Request, res: Response) : Promise<Response> {
-    const { params: { id } } = req
+  public async show (req: ApplicationRequest, res: Response) : Promise<Response> {
+    const { params: { id }, userId } = req
     const repository = new ToolRepository({ model: ToolModel })
     const getToolByIdService = new GetToolById({ repository })
-    const tool = await getToolByIdService.execute(id)
+    const tool = await getToolByIdService.execute(id, userId)
 
     return res.json(tool)
   }
@@ -38,7 +39,6 @@ class ToolController {
     const repository = new ToolRepository({ model: ToolModel })
     const removeToolByIdAndUserService = new RemoveToolByIdAndUser({ repository })
     const tool = await removeToolByIdAndUserService.execute(id, userId)
-    console.log('@tool', tool)
 
     return res.json(tool)
   }

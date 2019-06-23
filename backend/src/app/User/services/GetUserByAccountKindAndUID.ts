@@ -9,7 +9,7 @@ interface ExecuteOptions { selectPassword?: boolean}
 class GetUserByAccountKindAndUID {
   private repository: UserRepository
 
-  public constructor ({ repository }) {
+  public constructor ({ repository } : { repository: UserRepository }) {
     this.repository = repository
   }
 

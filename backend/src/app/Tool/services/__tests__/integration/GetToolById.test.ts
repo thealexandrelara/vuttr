@@ -36,7 +36,7 @@ describe('Tool', () : void => {
           ] }, user.id.toString())
 
         const getToolByIdService = new GetToolById({ repository: repository })
-        const retrievedTool = await getToolByIdService.execute(tool.id)
+        const retrievedTool = await getToolByIdService.execute(tool.id, user._id.toString())
 
         expect(retrievedTool.id).toBe(tool.id)
       })

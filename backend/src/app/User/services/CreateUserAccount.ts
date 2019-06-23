@@ -1,11 +1,10 @@
 import { UserRepository, CreateUserAccountParams } from '../repository'
 import { UserDocument } from '../interfaces'
-import { AccountKind } from '../components/Account'
 
 class CreateUserAccount {
   private repository: UserRepository
 
-  public constructor ({ repository }) {
+  public constructor ({ repository } : { repository: UserRepository }) {
     this.repository = repository
   }
 

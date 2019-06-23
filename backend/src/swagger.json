@@ -1,0 +1,474 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VUTTR API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Localhost server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Creates a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/tools": {
+      "get": {
+        "summary": "Get tools created by the authenticated user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tag",
+            "description": "If passed, only tools with provided tag will be returned",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "If passed, only tools with provided search term will be returned",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get tools",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tool"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new tool",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tool"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tool"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/tools/{id}": {
+      "get": {
+        "summary": "Get a tool by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Tool ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tool"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. User does not have permission to access this resource."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a tool by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Tool ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tool"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. User does not have permission to delete this resource."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/auth/local": {
+      "post": {
+        "summary": "Authenticate user with e-mail and password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User authenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "summary": "Authenticate user with a Google account",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "Access token provided by Google OAuth API",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User authenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/auth/facebook": {
+      "get": {
+        "summary": "Authenticate user with a Facebook account",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "Access token provided by Facebook OAuth API",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User authenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "writeOnly": true,
+            "minLength": 6
+          },
+          "accounts": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": ["local", "google", "facebook"]
+                },
+                "uid": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 6
+                }
+              }
+            }
+          }
+        }
+      },
+      "Tool": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "user": {
+            "type": "string",
+            "readOnly": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

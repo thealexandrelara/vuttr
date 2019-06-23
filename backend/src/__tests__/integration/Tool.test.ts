@@ -46,9 +46,9 @@ describe('Tools', () : void => {
         const generateJwtToken = new AuthServices.GenerateJwtToken()
         const userToken = await generateJwtToken.execute(user)
 
-        await factory.create('Tool')
-        await factory.create('Tool')
-        await factory.create('Tool')
+        await factory.create('Tool', { user: user._id })
+        await factory.create('Tool', { user: user._id })
+        await factory.create('Tool', { user: user._id })
         const response = await request(app)
           .get('/tools')
           .set('Authorization', `Bearer ${userToken}`)
@@ -204,13 +204,28 @@ describe('Tools', () : void => {
         const generateJwtToken = new AuthServices.GenerateJwtToken()
         const userToken = await generateJwtToken.execute(user)
 
-        const tool = await factory.create('Tool')
+        const tool = await factory.create('Tool', { user: user._id })
         const response = await request(app)
           .get(`/tools/${tool.id}`)
           .set('Authorization', `Bearer ${userToken}`)
           .expect(200)
 
         expect(response.body._id).toBe(tool.id)
+      })
+
+      it('should not allow a user that did not create the tool to view it', async () : Promise<void> => {
+        const generateJwtToken = new AuthServices.GenerateJwtToken()
+
+        const firstUser = await factory.create('User')
+        const tool = await factory.create('Tool', { user: firstUser._id })
+
+        const secondUser = await factory.create('User')
+        const secondUserToken = await generateJwtToken.execute(secondUser)
+
+        await request(app)
+          .get(`/tools/${tool.id}`)
+          .set('Authorization', `Bearer ${secondUserToken}`)
+          .expect(403)
       })
     })
 

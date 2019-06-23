@@ -10,13 +10,13 @@ interface GetAllToolsContext {
 
 class GetAllTools {
   private repository: ToolRepository
-  public constructor ({ repository }) {
+  public constructor ({ repository } : { repository: ToolRepository }) {
     this.repository = repository
   }
 
-  public async execute (context : GetAllToolsContext = {}) : Promise<ToolDocument[]> {
+  public async execute (context : GetAllToolsContext = {}, userId: string) : Promise<ToolDocument[]> {
     const { requestQuery } = context
-    const tools = await this.repository.getAllTools({ requestQuery })
+    const tools = await this.repository.getAllTools({ requestQuery }, userId)
 
     return tools
   }

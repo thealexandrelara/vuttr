@@ -9,7 +9,6 @@ class UserRoutes {
   public get router () : express.Router {
     const router = express.Router()
 
-    router.get('/', handle(UserController.index))
     router.post('/', celebrate(validators.store), handle(UserController.store))
 
     return router

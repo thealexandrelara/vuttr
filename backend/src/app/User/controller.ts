@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import UserModel from './model'
 import { UserRepository } from './repository'
 import { CreateUserAccount, GetAllUsers } from './services'
-import { AccountKind, Account } from './components/Account'
+import { AccountKind } from './components/Account'
 import { AuthServices } from '../Auth'
 
 class UserController {
@@ -24,10 +24,6 @@ class UserController {
 
     return res.json({ token })
   }
-
-  public async update () {}
-
-  public async destroy () {}
 }
 
 export default new UserController()
