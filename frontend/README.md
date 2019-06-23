@@ -36,7 +36,7 @@ Access the created folder and execute the project
 ```
 cd vuttr/frontend
 
-# if you're using Docker (make sure that you have a mongodb instance already up and running)
+# if you're using Docker
 docker build -t vuttr-frontend . && docker run -it vuttr-frontend
 
 # if you're installing manually
