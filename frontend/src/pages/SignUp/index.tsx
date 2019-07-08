@@ -67,7 +67,7 @@ const SignUp = () => {
       <Content>
         <AppTitle>VUTTR</AppTitle>
         <FormContainer>
-          <Title>Cadastrar com</Title>
+          <Title>Sign up with</Title>
           <SocialButtonsContainer>
             <FacebookLogin
               appId={authConfig.facebook.appId}
@@ -86,7 +86,7 @@ const SignUp = () => {
                 )}
             />
           </SocialButtonsContainer>
-          <Divider text="OU" />
+          <Divider text="OR" />
           <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={signUpValidationSchema}>
             {formikProps => (
               <Form>
