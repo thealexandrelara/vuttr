@@ -7,8 +7,17 @@ services:
       dockerfile: Dockerfile
     command: yarn dev
     restart: always
-    ports:
-      - "3000:3000"
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.backend=backend"
+      - "traefik.frontend.rule=Host:api.localhost"
+      - "traefik.docker.network=web"
+      - "traefik.port=3000"
+    # ports:
+    #   - "3000:3000"
+    networks: 
+      - internal
+      - web
     volumes:
       - /usr/app/node_modules
       - ./backend:/usr/app
@@ -16,26 +25,60 @@ services:
       - database
   database:
     image: mongo
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
+    networks: 
+      - internal
+    labels: 
+      - traefik.enable=false
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     restart: always
     command: yarn start
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.backend=frontend"
+      - "traefik.frontend.rule=Host:react.localhost"
+      - "traefik.docker.network=web"
+      - "traefik.port=3000"
     env_file:
       - ./frontend/.env
-    ports:
-      - "3001:3000"
+    # ports:
+    #   - "3001:3000"
     volumes:
       - /usr/app/node_modules
       - ./frontend:/usr/app
+    networks: 
+      - web
+      - internal
     depends_on:
       - backend
+  traefik:
+    image: traefik:1.7-alpine
+    restart: always
+    labels: 
+      - "traefik.frontend.rule=Host:monitor.localhost"
+      - "traefik.port=8080"
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      # - ./acme.json:/acme.json
+    ports: 
+      - "80:80"
+      - "443:443"
+    networks: 
+      - web
 volumes:
   mongodb_data:
   mongodb_config:
+
+networks: 
+  web:
+    external: true
+  internal: 
+    external: false
