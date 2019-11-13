@@ -1,9 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import Divider from './Divider'
 
-import { Container } from './styles'
-
-import { Props } from './types'
-
-const Divider : FunctionComponent<Props> = ({ text }: Props) => <Container>{text}</Container>
+export { Divider } from './Divider'
 
 export default Divider

@@ -38,8 +38,8 @@ export const Input = styled.input<Props>`
 
   ${props => !props.error && css` 
     &:focus {
-      background-color: ${props => props.theme.colors.darkestWhite};
-      border-color: ${props => props.theme.colors.mostDarkestWhite};
+      background-color: ${props.theme.colors.darkestWhite};
+      border-color: ${props.theme.colors.mostDarkestWhite};
     }
   `}
   

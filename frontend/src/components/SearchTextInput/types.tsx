@@ -8,7 +8,7 @@ interface OwnProps {
   placeholder?: string,
   className?: string,
   style?: {},
-  searchInputRef: React.MutableRefObject<any>,
+  searchInputRef?: React.MutableRefObject<any>,
   onChange(e: React.ChangeEvent<HTMLInputElement>): void
 }
 
